@@ -1,4 +1,8 @@
 TestApp::Application.routes.draw do
+  get "static_pages/faq"
+
+  get "static_pages/about"
+
   resources :products
 
 
