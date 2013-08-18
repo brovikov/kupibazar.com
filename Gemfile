@@ -9,6 +9,11 @@ group :development, :test do
   gem 'rspec-rails', '2.11.0'
 end
 
+group :test do
+    gem 'factory_girl_rails', '4.1.0'
+    gem 'capybara' #, '1.1.2'
+  end
+
 group :development do
   gem 'annotate','2.5.0'
 end
@@ -43,7 +48,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
