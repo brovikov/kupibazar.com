@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false}
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6, 
+    message: 'Пароль должен состоять минимум из 6-ти символов' }
   validates :password_confirmation, presence: true
   before_save { |user| user.email = email.downcase }
 end
