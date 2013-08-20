@@ -1,12 +1,13 @@
 #=== REQUIRE ===#
-require 'rvm/capistrano'
-set :rvm_type,        :system
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
+#require 'rvm/capistrano'
+#set :rvm_type,        :user
+set :rvm_ruby_string, '1.9.2'
 
 require 'bundler/capistrano'
 
+
 #=== SETTINGS ===#
-set :application, "test_app"
+set :application, "test-app"
 set :deploy_to,   "/rails-app/#{application}"
 
 set :domain, "firehost.com.ua"
@@ -30,13 +31,13 @@ set :local_repository,      "ssh://#{user}@#{domain}/git/#{application}.git"
 
 #git@github.com:brovikov/test_app.git
 #=== TASKS ===#
-before 'deploy:setup', 'rvm:install_ruby'
+#before 'deploy:setup', 'rvm:install_ruby'
 
-after 'deploy:update_code', :roles => :app do
-  run "rm -f #{current_release}/config/database.yml"
-  run "ln -s #{deploy_to}/shared/config/database.yml #{current_release}/config/database.yml"
-  run "sudo chown -R $(whoami):www-data #{deploy_to}"
-end
+#after 'deploy:update_code', :roles => :app do
+#  run "rm -f #{current_release}/config/database.yml"
+#  run "ln -s #{deploy_to}/shared/config/database.yml #{current_release}/config/database.yml"
+#  run "sudo chown -R $(whoami):www-data #{deploy_to}"
+#end
 
 after 'deploy', 'deploy:migrate', 'deploy:cleanup'
 

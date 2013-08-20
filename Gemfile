@@ -11,7 +11,7 @@ end
 
 group :test do
     gem 'factory_girl_rails', '4.1.0'
-    gem 'capybara' #, '1.1.2'
+    gem 'capybara' , '1.1.2'
   end
 
 group :development do
@@ -36,6 +36,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :production do
+  gem 'mysql2'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -48,7 +52,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano', '2.9.0'
 
 # To use debugger
 # gem 'debugger'
