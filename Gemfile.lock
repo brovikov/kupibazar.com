@@ -32,6 +32,7 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-datetimepicker-rails (0.0.11)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
     capistrano (2.9.0)
@@ -56,6 +57,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    devise (3.0.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.3)
+    devise-russian (2.0.1.1)
+      devise
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -90,6 +98,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -155,6 +164,8 @@ GEM
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.3)
+      rack (>= 1.0)
     websocket (1.0.7)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -165,11 +176,15 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
+  bootstrap-datetimepicker-rails
   bootstrap-sass (= 2.1)
   capistrano (= 2.9.0)
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.1)
+  devise
+  devise-russian (~> 2.0.1.1)
   factory_girl_rails (= 4.1.0)
+  i18n
   jquery-rails
   mysql2
   rails (= 3.2.13)

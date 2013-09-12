@@ -2,23 +2,33 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  nik                    :string(255)
+#  balance                :decimal(6, 2)    default(0.0), not null
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
-  has_secure_password
-  validates :name, presence: true, length: { maximum: 30 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
-  uniqueness: { case_sensitive: false}
-  validates :password, presence: true, length: { minimum: 6, 
-    message: 'Пароль должен состоять минимум из 6-ти символов' }
-  validates :password_confirmation, presence: true
-  before_save { |user| user.email = email.downcase }
-end
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nik, :balance
+  # attr_accessible :title, :body
+  validates(:nik, presence: true)
+  has_many :payments
+  end
