@@ -1,0 +1,8 @@
+<h1> Пополнение баланса </h1>
+  
+  Дата платежа:<%= l @payment.data, format: :dt %>  </br>
+  Время платежа:  <%= l @payment.time, format: :tm %> </br>
+  ID Транзакции: <%= @payment.id %> </br>
+  Сумма: <%= @payment.value %> руб. РФ</br> 
+  Пользователь: <%= @payment.user.nik %> </br>
+  Коментарий: <%= @payment.comment %> </br>

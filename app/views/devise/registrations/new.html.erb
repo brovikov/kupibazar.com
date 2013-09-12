@@ -1,0 +1,26 @@
+<h2>Регистрация в системе:</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+<div class="row">
+  <div class="span6 offset3">
+  <%= f.label :email %>
+  <%= f.email_field :email, :autofocus => true %>
+    
+  <%= f.label :nik, 'Ник на одноклассниках' %>
+  <%= f.text_field :nik %>
+
+
+  <%= f.label :password, 'Пароль' %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation, 'Подтверждение пароля' %>
+  <%= f.password_field :password_confirmation %>
+
+  <%= f.submit "Зарегистрировать", class: "btn btn-large btn-primary" %>
+  </div>
+</div>
+<% end %>
+
+<%= render "devise/shared/links" %>
