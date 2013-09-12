@@ -1,0 +1,50 @@
+
+
+<%= form_for(@payment) do |f| %>
+<div class="span6 offset3">
+
+  Дата пополнения (по квитанции): </br> 
+  <div id="datetimepicker4" class="input-append">
+    <input data-format="dd-MM-yyyy" type="text" name="payment[data]" class="input-small"></input>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker4').datetimepicker({
+      pickTime: false
+    });
+  });
+</script>
+  
+ 
+  </br> Время пополнения (по квитанции): </br> 
+  <div id="datetimepicker3" class="input-append">
+    <input data-format="hh:mm" type="text" name="payment[time]" class="input-small"></input>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker3').datetimepicker({
+      pickDate: false
+    });
+  });
+</script> </br>
+    
+    <%= f.label :value, 'Сумма пополнения:'%>
+    <%= f.text_field :value, class: 'input-small'  %> </br>
+    <%= f.label :comment, 'Коментарий к пополнению:' %>
+    <%= f.text_area :comment, placeholder: "В случае необходимости укажите Ваш коментарий (не обязательно)...",
+    rows: 3 %>
+    <%= f.submit "Пополнить баланс" , class: "btn btn-large btn-primary" %><br />
+  </div>
+</div>
+
+<% end %>

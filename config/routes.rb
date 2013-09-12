@@ -1,14 +1,15 @@
 TestApp::Application.routes.draw do
-  get "users/new"
+  #get "payments/new"
+
+  devise_for :users
+
   get "static_pages/faq"
   get "static_pages/about"
-
+  root to: 'products#index'
   resources :products
   resources :users
-
-  root to: 'products#show'
-  match '/signup',  to: 'users#new'
-
+  resources :payments
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,10 @@
+<h1>Редактирование Пополнение баланса ID:  <%= @payment.id %> </h1>
+<% if @payment.status == 0 %> 
+        <%= render 'form' %>
+  <% else %>
+        <%= flash[:notice] = "Редактирование данного пополнения недоступно" %>
+<script type="text/javascript">
+    window.location.href="/payments"  // put your correct path in a string here
+  </script>
+<% end %>
+
