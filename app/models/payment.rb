@@ -12,7 +12,11 @@
 #
 
 class Payment < ActiveRecord::Base
-  attr_accessible :data, :time, :user_id, :value, :comment
+  attr_accessible :data, :time, :user_id, :value, :comment, :status
+  validates :data, presence: true #, message: 'Дата не может быть незаполненной' 
+  validates :time, presence: true #, message: 'Время не может быть незаполненным' 
+  validates :value, presence: true #,  :message 'Сумма не может быть незаполненной' 
+  validates_numericality_of :value, message: 'Сумма - столько цифры, разделитель - запятая, например: 288,80' 
   validates :comment, :length => { :maximum => 200 }
   belongs_to :user
 end
