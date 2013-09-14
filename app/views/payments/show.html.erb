@@ -1,5 +1,6 @@
 <h1> Пополнение баланса </h1>
   
+  <%= stat (@payment.status)  %>
   Дата платежа:<%= l @payment.data, format: :dt %>  </br>
   Время платежа:  <%= l @payment.time, format: :tm %> </br>
   ID Транзакции: <%= @payment.id %> </br>

@@ -167,6 +167,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.0.7)
+    will_paginate (3.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -192,3 +193,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3 (= 1.3.5)
   uglifier (>= 1.0.3)
+  will_paginate (~> 3.0.0)
