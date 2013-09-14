@@ -10,6 +10,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'devise'
 gem 'i18n'
 gem "devise-russian", "~> 2.0.1.1"
+gem 'will_paginate', '~> 3.0.0'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

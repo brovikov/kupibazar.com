@@ -1,0 +1,38 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Статус</th>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% payment_pr.each do |payment| %>
+      <tr>
+        <td><%= link_to payment.id, payment_path(payment) %></td>
+        <td><%= stat (payment.status)  %>    </td>
+        <td><%= l payment.data, format: :dt %></td>
+        <td><%= l payment.time, format: :tm %></td>
+        <td><span class="price"><%= number_to_currency(payment.value) %></span></td>
+        <td width = '40%'><%= payment.comment %></td>
+        <td>
+          <% if payment.status < 1 %>
+            <%= link_to 'Изменить', edit_payment_path(payment), :class => 'btn btn-mini' %>
+            <%= link_to 'Удалить', payment_path(payment), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+            <%= link_to 'Принять', status_payment_path(payment), :class => 'btn btn-mini' %>
+          <% end %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate payment_pr, param_name: page_param , container: false %>
+</div>
+
+

@@ -4,7 +4,17 @@ class PaymentsController < ApplicationController
   end
   
   def index
-    @payment= current_user.payments.all
+    @payment= current_user.payments.paginate page: params[:page_full], order: 'created_at desc',
+    per_page: 2
+    @payment_acc= current_user.payments.where( status: 1 ).paginate page: params[:page_acc], order: 'created_at desc',
+    per_page: 2
+    @payment_nacc= current_user.payments.where( status: 0 ).paginate page: params[:page_nacc], order: 'created_at desc',
+    per_page: 2
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def new
@@ -56,8 +66,32 @@ class PaymentsController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
-     
       end
     end
   end
+  
+  def status
+    @payment = Payment.find(params[:id])
+    respond_to do |format|
+      if @payment.update_attributes(status: 1) 
+        current_user.update_attributes(balance: current_user.balance + @payment.value)
+          format.html { redirect_to payments_url, notice: 'Статус пополнения баланса успешно обновлен.' }
+          format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+  
+      end
+    end      
+  end
+  def ordernacc
+    @payment= current_user.payments.where(status: 0).paginate page: params[:page], order: 'created_at desc',
+    per_page: 20
+  end  
+  def orderacc
+    @payment= current_user.payments.where(status: 1).paginate page: params[:page], order: 'created_at desc',
+    per_page: 20
+  end  
 end
+
+    
