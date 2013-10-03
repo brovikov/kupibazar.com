@@ -5,11 +5,11 @@ class PaymentsController < ApplicationController
   
   def index
     @payment= current_user.payments.paginate page: params[:page_full], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
     @payment_acc= current_user.payments.where( status: 1 ).paginate page: params[:page_acc], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
     @payment_nacc= current_user.payments.where( status: 0 ).paginate page: params[:page_nacc], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
 
     respond_to do |format|
       format.html
@@ -84,14 +84,6 @@ class PaymentsController < ApplicationController
       end
     end      
   end
-  def ordernacc
-    @payment= current_user.payments.where(status: 0).paginate page: params[:page], order: 'created_at desc',
-    per_page: 20
-  end  
-  def orderacc
-    @payment= current_user.payments.where(status: 1).paginate page: params[:page], order: 'created_at desc',
-    per_page: 20
-  end  
 end
 
     

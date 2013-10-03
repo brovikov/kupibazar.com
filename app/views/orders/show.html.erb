@@ -1,0 +1,20 @@
+<h1> Индивидуальный заказ № <%= @order.id %> </h1>
+  
+  Пользователь: <%= @order.user.nik %> </br>
+
+<ol>
+<% for item in @order.items %>
+  <li>
+    Стоимость товра: <%=h item.value %>, руб. РФ </br>
+    Наименование товара: <%=h item.name %> </br>
+  
+  </li>
+
+<% end %>
+</ol>
+
+<p>
+  <%= link_to "Edit", edit_order_path(@order) %> |
+  <%= link_to "Destroy", @order, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", orders_path %>
+</p>
