@@ -1,10 +1,10 @@
-<% if @payment.errors.any? %>
+<% if error.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-error">
-      Количество ошибок: <%= @payment.errors.count %>.
+      Количество ошибок: <%= error.errors.count %>.
     </div>
     <ul>
-    <% @payment.errors.full_messages.each do |msg| %>
+    <% error.errors.full_messages.each do |msg| %>
       <li> <%= msg %></li>
     <% end %>
     </ul>
