@@ -3,10 +3,12 @@
 # Table name: payments
 #
 #  id         :integer          not null, primary key
-#  data       :date
-#  time       :time
-#  value      :decimal(6, 2)
-#  user       :string(255)
+#  data       :date             not null
+#  time       :time             not null
+#  value      :decimal(6, 2)    not null
+#  user_id    :integer          not null
+#  comment    :string(255)
+#  status     :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

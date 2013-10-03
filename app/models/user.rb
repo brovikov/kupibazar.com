@@ -31,4 +31,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   validates(:nik, presence: true)
   has_many :payments
+  has_many :orders
+  accepts_nested_attributes_for :orders
   end

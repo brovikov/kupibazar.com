@@ -4,8 +4,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#pane1" data-toggle="tab">Все пополнения</a></li>
     <li><a href="#pane2" data-toggle="tab">На согласовании</a></li>
-    <li><a href="#pane3" data-toggle="tab">Tab 3</a></li>
-    <li><a href="#pane4" data-toggle="tab">Tab 4</a></li>
+    <li><a href="#pane3" data-toggle="tab">Согласованные</a></li>
   </ul>
   <div class="tab-content">
     <div id="pane1" class="tab-pane active">
@@ -17,16 +16,13 @@
     <div id="pane2" class="tab-pane">
        
       <div id="payments_nacc">
-       
-         <%= render partial: 'order_list', locals: { payment_pr: @payment_nacc, page_param: 'page_nacc' } %>
-        
+           <%= render partial: 'order_list', locals: { payment_pr: @payment_nacc, page_param: 'page_nacc' } %>
       </div>
     </div>
     <div id="pane3" class="tab-pane">
-      <h4>Pane 3 Content</h4>
-    </div>
-    <div id="pane4" class="tab-pane">
-      <h4>Pane 4 Content</h4>
+      <div id="payments_acc">
+        <%= render partial: 'order_list', locals: { payment_pr: @payment_acc, page_param: 'page_acc' } %>
+      </div>
     </div>
   </div><!-- /.tab-content -->
 </div><!-- /.tabbable -->

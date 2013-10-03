@@ -1,0 +1,33 @@
+    <div class="span6">
+      <%= f.label :name, 'Наименование товара:'%>
+      <%= f.text_field :name %><br />
+    </div> 
+    <div class="span6 ">
+      <%= f.label :value, 'Стоимость товара:'%>
+      <%= f.text_field :value, class: 'input-small' %><br />
+    </div> 
+    <div class="span6 ">
+      <%= f.label :link, 'Ссылка на товар:'%>
+      <%= f.text_field :link, placeholder: "http://" %><br />
+    </div> 
+    <div class="span6 "> 
+      <%= f.label :img, 'Ссылка на картинку товара:'%>
+      <%= f.text_field :img %><br />
+     </div>
+   <div class="span12 ">  
+      <%= f.label :comment, 'Коментарий:'%>
+      <%= f.text_area :comment, placeholder: "В случае необходимости укажите Ваш коментарий (не обязательно)...",
+        rows: 3 %><br />
+    </div>   
+    <div class="span4"> 
+      <%= f.label :seller_rate, 'Рейтинг продавца:'%>
+      <%= f.text_field :seller_rate %><br />
+    </div>  
+    <div class="span4">     
+      <%= f.label :status, 'status:'%>
+      <%= f.text_field :status %>
+    </div>   
+    <div class="span4">   
+      <%= f.label :count, 'Количество:'%>
+      <%= f.text_field :count, class: 'input-small' %>
+    </div>   
