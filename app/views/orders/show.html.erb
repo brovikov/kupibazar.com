@@ -5,16 +5,19 @@
 <ol>
 <% for item in @order.items %>
   <li>
-    Стоимость товра: <%=h item.value %>, руб. РФ </br>
+    <%= order_stat (item.status)  %>
+    Стоимость товра: <%=h item.value %>, USD</br>
     Наименование товара: <%=h item.name %> </br>
-  
+    Рейтинг продавца: <%=h item.seller_rate %> </br>
+    <%= link_to(item.link, item.link) %> </br>
+    <%= image_tag(item.img, size: "200x200") %> 
   </li>
 
 <% end %>
 </ol>
 
 <p>
-  <%= link_to "Edit", edit_order_path(@order) %> |
-  <%= link_to "Destroy", @order, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", orders_path %>
+  <%= link_to "Изменить", edit_order_path(@order) %> |
+  <%= link_to "Удалить", @order, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Просмотреть все заказы", orders_path %>
 </p>
