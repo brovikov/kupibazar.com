@@ -13,6 +13,7 @@
 #  order_id    :integer          not null
 #  comment     :string(255)
 #  status      :integer          default(0), not null
+# 0 - new order, 1 - confirmed order, 2 payd order, 3 byed order, 4 
 #  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -21,5 +22,13 @@
 class Item < ActiveRecord::Base
   attr_accessible :title, :body, :value, :link, :seller_rate, :img, :color, :size,  :order_id, :id, :created_at, :updated_at,
   :comment, :status, :count, :name
+  attr_accessible :data, :time, :user_id, :value, :comment, :status
+  validates :link, presence: true
+  validates :name, presence: true
+  validates :seller_rate, presence: true
+  validates :img, presence: true
+  validates :value, presence: true
+  validates_numericality_of :value, greater_than: 0, message: 'Сумма - только цифры, разделитель - точка, например: 288.80' 
+  validates :comment, :length => { :maximum => 255 }
   belongs_to :order
  end

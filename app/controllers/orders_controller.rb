@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+  # для получения контента через http
+  require 'open-uri'
+  # подключаем Nokogiri
+  require 'nokogiri'
+  
   def new
     @order = Order.new
     @order.items.build
@@ -32,7 +37,11 @@ class OrdersController < ApplicationController
   def create
     
     @order = current_user.orders.build ( params[:order] )
-   
+    #@order.items.each do |img|   
+    #   doc = Nokogiri::HTML(open(img.link))
+    #   img.img = doc.css('meta')[7]['content']
+    #  
+    #end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Ваш заказ успешно добавлен и ожидает подтверждения.' }
