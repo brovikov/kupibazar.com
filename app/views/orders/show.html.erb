@@ -10,7 +10,7 @@
     Наименование товара: <%=h item.name %> </br>
     Рейтинг продавца: <%=h item.seller_rate %> </br>
     <%= link_to(item.link, item.link) %> </br>
-    <%= image_tag(item.img, size: "200x200") %> 
+<%= image_tag(item.img, size: "200x200", class: "img-polaroid") %> 
   </li>
 
 <% end %>

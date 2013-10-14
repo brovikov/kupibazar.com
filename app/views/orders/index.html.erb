@@ -1,0 +1,36 @@
+<h1>История индивидуальных заказов:</h1>
+      
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">Все заказы</a></li>
+    <li><a href="#pane2" data-toggle="tab">На согласовании</a></li>
+    <li><a href="#pane3" data-toggle="tab">Согласованные</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+      <div id="orders">
+        <%= render partial: 'order_list', locals: { order_pr: @order, page_param: 'page_full' } %>
+      </div>
+      
+    </div>
+    <div id="pane2" class="tab-pane">
+       
+      <div id="orders_nacc">
+           <%= render partial: 'order_list', locals: { order_pr: @order_nacc, page_param: 'page_nacc' } %>
+      </div>
+    </div>
+    <div id="pane3" class="tab-pane">
+      <div id="orders_acc">
+        <%= render partial: 'order_list', locals: { order_pr: @order_acc, page_param: 'page_acc' } %>
+      </div>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
+
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>

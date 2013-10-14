@@ -1,0 +1,38 @@
+<h1>Администрирование единичных заказов:</h1>
+      
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">На согласовании</a></li>
+    <li><a href="#pane2" data-toggle="tab">Все заказы</a></li>
+    <li><a href="#pane3" data-toggle="tab">Согласованные</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+
+      <div id="items_nacc">
+           <%= render partial: 'items_list', locals: { payment_pr: @items_nacc, page_param: 'page_nacc' } %>
+      </div>
+      
+    </div>
+    <div id="pane2" class="tab-pane">
+       
+      <div id="items">
+        <%= render partial: 'items_list', locals: { payment_pr: @items, page_param: 'page_full' } %>
+      </div>
+   
+    </div>
+    <div id="pane3" class="tab-pane">
+      <div id="items_acc">
+        <%= render partial: 'items_list', locals: { payment_pr: @items_acc, page_param: 'page_acc' } %>
+      </div>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
+
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>

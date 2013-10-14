@@ -13,7 +13,6 @@
 #  order_id    :integer          not null
 #  comment     :string(255)
 #  status      :integer          default(0), not null
-# 0 - new order, 1 - confirmed order, 2 payd order, 3 byed order, 4 
 #  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -8,14 +8,17 @@ TestApp::Application.routes.draw do
   root to: 'products#index'
   resources :products
   resources :users
-  resources :orders
+  resources :orders 
   resources :items
   resources :payments do
     get :status, on: :member
-    get :ordernacc, on: :collection
-    get :orderacc, on: :collection
+#    get :ordernacc, on: :collection
+#    get :orderacc, on: :collection
   end 
   resources :purchases
+  resources :admin_items do
+    get :status, on: :member
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

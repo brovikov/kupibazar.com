@@ -2,11 +2,12 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  status     :integer          default(0), not null
-#  user_id    :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  status      :integer          default(0), not null
+#  user_id     :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  order_value :integer          default(0)
 #
 
 require 'spec_helper'
