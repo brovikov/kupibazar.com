@@ -8,4 +8,5 @@ module OrdersHelper
       '<span class="label label-success"> Подтвержден </span></br>'.html_safe
       end            
   end
+  
 end

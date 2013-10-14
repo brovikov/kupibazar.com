@@ -1,0 +1,5 @@
+$('#orders').html('<%=escape_javascript(render(:partial => "order_list", locals: { order_pr: @order, page_param: 'page_full' }))%>');
+$('#orders_nacc').html('<%=escape_javascript(render(:partial => "order_list", locals: { order_pr: @order_nacc, page_param: 'page_nacc' }))%>');
+$('#orders_acc').html('<%=escape_javascript(render(:partial => "order_list", locals: { order_pr: @order_acc, page_param: 'page_acc' }))%>');
+
+$('.flickr_pagination a').attr('data-remote', 'true');

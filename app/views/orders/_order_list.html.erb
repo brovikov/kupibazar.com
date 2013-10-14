@@ -1,0 +1,62 @@
+<div class = flickr_pagination >
+          <%= will_paginate order_pr, param_name: page_param , container: false %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Фото</th>
+      <th>Наименование</th>
+      <th>Сумма</th>
+      <th>Статус</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% order_pr.each do |order| %>
+      <tr bgcolor="#EDEDED">
+        <td><i class="icon-hand-right"></i></td>
+        <td>Заказ № <%= link_to order.id, order_path(order)%></td> 
+        <td>от <%= l order.created_at, format: :short  %></td> 
+        <td>Итого: <strong><%=order.order_value%></strong></td> 
+        <td></td><td></td><td></td>
+          <% order.items.each do |items| %>
+            <tr>
+              <td></td> 
+              <td>
+                                  
+                <a class="pull-left" href="#">
+                <%= link_to image_tag(items.img, size: "50x50"), order_path(order)  %>
+                </a>
+               <div style="width:150px;">
+                 <small>
+                   Размер: <%= items.size %> <br/>
+                   Цвет: <%= items.color %> 
+                 </small>
+              
+               </div>
+               </td> 
+              <td width = '35%'><%= link_to items.name, items.link %></td>
+              <td>
+                <strong>$<%= items.value %></strong><br/>
+                <small><%= price(items.value, 'rub', items.count)[:str] %></small> <br/>
+                <span class='total_price'><%= price(items.value, 'rub', items.count)[:val] %> руб РФ</span> <br/>
+              </td>
+              <td><%= order_stat(items.status)  %></td>
+              <td>
+          <% if items.status < 1 %>
+            <%= link_to 'Изменить', edit_order_path(order), :class => 'btn btn-mini' %>
+            <%= link_to 'Удалить', order_path(order), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+          <% end %> 
+        </td>
+            </tr>
+              <% end %>
+           
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate order_pr, param_name: page_param , container: false %>
+</div>
