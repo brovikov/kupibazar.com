@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925144628) do
+ActiveRecord::Schema.define(:version => 20131008102309) do
 
   create_table "items", :force => true do |t|
     t.decimal  "value",       :precision => 6, :scale => 2,                :null => false
@@ -32,10 +32,11 @@ ActiveRecord::Schema.define(:version => 20130925144628) do
   add_index "items", ["order_id", "created_at", "id"], :name => "index_items_on_order_id_and_created_at_and_id"
 
   create_table "orders", :force => true do |t|
-    t.integer  "status",     :default => 0, :null => false
-    t.integer  "user_id",                   :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "status",                                    :default => 0,   :null => false
+    t.integer  "user_id",                                                    :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.decimal  "order_value", :precision => 6, :scale => 2, :default => 0.0
   end
 
   add_index "orders", ["user_id", "created_at", "id"], :name => "index_orders_on_user_id_and_created_at_and_id"

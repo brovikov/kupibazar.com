@@ -3,6 +3,21 @@ class OrdersController < ApplicationController
   require 'open-uri'
   # подключаем Nokogiri
   require 'nokogiri'
+  include ApplicationHelper
+  
+  def index
+    @order= current_user.orders.paginate page: params[:page_full], order: 'created_at desc',
+    per_page: 20
+    @order_acc= current_user.orders.where( status: 1 ).paginate page: params[:page_acc], order: 'created_at desc',
+    per_page: 20
+    @order_nacc= current_user.orders.where( status: 0 ).paginate page: params[:page_nacc], order: 'created_at desc',
+    per_page: 20
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
   
   def new
     @order = Order.new
@@ -20,7 +35,8 @@ class OrdersController < ApplicationController
     def update
       @order = Order.find(params[:id])
       if @order.update_attributes(params[:order])
-        flash[:notice] = "Successfully updated order."
+        @order.save
+        flash[:notice] = "Заказ успешно обновлен."
         redirect_to @order
     else
       render :action => 'edit'
@@ -30,7 +46,7 @@ class OrdersController < ApplicationController
     def destroy
       @order = Order.find(params[:id])
       @order.destroy
-      flash[:notice] = "Successfully destroyed order."
+      flash[:notice] = "Заказ успешно удален."
       redirect_to orders_url
   end
   
@@ -48,8 +64,9 @@ class OrdersController < ApplicationController
          format.json { render json: @order, status: :created, location: @payment }
       else
          format.html { render action: "new" }
-         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end  
   end
+  
+ 
 end

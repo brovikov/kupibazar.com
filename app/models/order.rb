@@ -2,21 +2,24 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  status     :integer          default(0), not null
-#  user_id    :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  status      :integer          default(0), not null
+#  user_id     :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  order_value :integer          default(0)
 #
 
 class Order < ActiveRecord::Base
+  include ApplicationHelper
   attr_accessible :status, :id, :user_id, :items_attributes
   has_many :items, :dependent => :destroy
   belongs_to :user
   accepts_nested_attributes_for :items,  :allow_destroy => true
   before_validation :parse_img
   before_validation :parse_rate
- 
+  before_save :total_value
+
   private
   def parse_img
     self.items.each do |img|   
@@ -35,8 +38,10 @@ class Order < ActiveRecord::Base
           end
         doc = Nokogiri::HTML(open(rate.link))
         rate.seller_rate = "Best Rate" #("a[class='seller-level-lnk']")['src'] #if img.img.blank?
-        
-                  
      end   
    end
+  def total_value  
+    self.order_value = (self.items.to_a.sum{|ttl| price(ttl.value, "rub", ttl.count)[:val]}).round( 2 )
+     
+  end 
 end
