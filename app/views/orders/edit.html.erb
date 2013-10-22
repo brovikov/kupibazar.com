@@ -1,6 +1,15 @@
 <h1>редактирование индивидуального заказа</h1>
-
+<% if @order.status == 0 %>
 <%= render 'form' %>
+    <% @order.items.each do |item| %>
+    <% item.update_attributes(status: 0) %>
+    <% end %>
+<% else %>
+        <%= flash[:notice] = "Редактирование данного заказа недоступно" %>
+        <script type="text/javascript">
+          window.location.href="/orders"  // put your correct path in a string here
+        </script>
+<% end %>
 
 <br />
 <%= link_to 'Back', '#' %>

@@ -1,0 +1,11 @@
+<h1>Индивидуальные заказы на выкупку:</h1>
+
+  <div id="items">
+    <%= render partial: 'list_pay', locals: { items: @items_for_pay, page_param: 'page_items' } %>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>

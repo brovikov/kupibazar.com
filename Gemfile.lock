@@ -38,6 +38,9 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-datetimepicker-rails (0.0.11)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
@@ -183,6 +186,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
+  best_in_place
   bootstrap-datetimepicker-rails
   bootstrap-sass (= 2.1)
   capistrano (= 2.9.0)

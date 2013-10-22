@@ -12,6 +12,8 @@ class OrdersController < ApplicationController
     per_page: 20
     @order_nacc= current_user.orders.where( status: 0 ).paginate page: params[:page_nacc], order: 'created_at desc',
     per_page: 20
+    @order_buyed= current_user.orders.where( status: 7 ).paginate page: params[:page_nacc], order: 'created_at desc',
+    per_page: 20
 
     respond_to do |format|
       format.html
@@ -67,6 +69,23 @@ class OrdersController < ApplicationController
       end
     end  
   end
-  
- 
+
+  def pay_for
+    @order = Order.find(params[:id])
+    if @order.status <2 
+    blnc = current_user.balance - @order.order_value
+      if blnc >= 0
+        @order.update_attributes( status: 2 ) 
+        @order.items.each do |item|  
+          item.update_attributes( status: 2 )
+        end
+        current_user.update_attributes( balance: blnc )
+        redirect_to orders_url, notice: 'Статус заказа успешно обновлен.'
+      else 
+        redirect_to orders_url, notice: 'Недостаточно средств на Вашем балансе.' 
+      end      
+    else
+      redirect_to orders_url, notice: 'Оплачивать дважды??! Странновато! :) Конечно же мы против :).' 
+    end 
+  end
 end
