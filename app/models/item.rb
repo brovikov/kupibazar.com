@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   validates :seller_rate, presence: true
   validates :img, presence: true
   validates :value, presence: true
-  validates_numericality_of :value, greater_than: 0, message: 'Сумма - только цифры, разделитель - точка, например: 288.80' 
+  validates_numericality_of :value, greater_than_or_equal_to: 0, message: 'Сумма - только цифры, разделитель - точка, например: 288.80' 
   validates :comment, :length => { :maximum => 255 }
   belongs_to :order
  end

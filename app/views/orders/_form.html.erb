@@ -1,15 +1,15 @@
-<%= nested_form_for(@order) do |f| %>
-<%= render 'shared/error_messages',  error: @order  %>
-
-<div class="row">
-<%= f.fields_for :items do |items_form| %>
-
-  <%= render partial: 'orders_fields', :locals => { :f => items_form } %>
-  <%= items_form.link_to_remove "Удалить этот товар" %>
+  <%= nested_form_for(@order) do |f| %>
+      <%= render 'shared/error_messages',  error: @order  %>
+    
+      <div class="row">
+      <%= f.fields_for :items do |items_form| %>
+          <%= render partial: 'orders_fields', :locals => { :f => items_form } %>
+          <%= items_form.link_to_remove "Удалить этот товар" %>
       <% end %>
- <p><%= f.link_to_add "Добавить еще один товар", :items %></p>       
-      <%= f.submit "Оформить заказ" , class: "btn btn-large btn-primary" %>
- </div> 
-<% end %>
+         <p><%= f.link_to_add "Добавить еще один товар", :items %></p>       
+         <%= f.submit "Оформить заказ" , class: "btn btn-large btn-primary" %> 
+         </div> 
+  <% end %>
 
- 
+
+

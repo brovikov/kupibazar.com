@@ -8,7 +8,9 @@ TestApp::Application.routes.draw do
   root to: 'products#index'
   resources :products
   resources :users
-  resources :orders 
+  resources :orders do
+    get :pay_for, on: :member
+  end 
   resources :items
   resources :payments do
     get :status, on: :member
@@ -18,6 +20,11 @@ TestApp::Application.routes.draw do
   resources :purchases
   resources :admin_items do
     get :status, on: :member
+    get :payd, on: :member
+    get :cancel, on: :member
+    get :pay_for_override, on: :member
+    get :list_pay, on: :collection  
+    get :list_confirm, on: :collection
   end
   
   # The priority is based upon order of creation:

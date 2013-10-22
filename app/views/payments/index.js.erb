@@ -1,6 +1,6 @@
-$('#payments').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @items, page_param: 'page_full' }))%>');
-$('#payments_nacc').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @items_nacc, page_param: 'page_nacc' }))%>');
-$('#payments_acc').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @items_acc, page_param: 'page_acc' }))%>');
+$('#payments').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @payment, page_param: 'page_full' }))%>');
+$('#payments_nacc').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @payment_nacc, page_param: 'page_nacc' }))%>');
+$('#payments_acc').html('<%=escape_javascript(render(:partial => "order_list", locals: { payment_pr: @payment_acc, page_param: 'page_acc' }))%>');
 
 $('.flickr_pagination a').attr('data-remote', 'true');
 

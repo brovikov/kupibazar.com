@@ -12,7 +12,7 @@
 
 class Order < ActiveRecord::Base
   include ApplicationHelper
-  attr_accessible :status, :id, :user_id, :items_attributes
+  attr_accessible :status, :id, :user_id, :items_attributes, :order_value
   has_many :items, :dependent => :destroy
   belongs_to :user
   accepts_nested_attributes_for :items,  :allow_destroy => true
@@ -42,6 +42,6 @@ class Order < ActiveRecord::Base
    end
   def total_value  
     self.order_value = (self.items.to_a.sum{|ttl| price(ttl.value, "rub", ttl.count)[:val]}).round( 2 )
-     
   end 
+  
 end

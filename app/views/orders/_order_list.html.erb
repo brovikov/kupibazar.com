@@ -19,10 +19,21 @@
         <td>Заказ № <%= link_to order.id, order_path(order)%></td> 
         <td>от <%= l order.created_at, format: :short  %></td> 
         <td>Итого: <strong><%=order.order_value%></strong></td> 
-        <td></td><td></td><td></td>
+        <td><%=order_stat(order.status)%></td><td></td>
+        <td>
+            <% if order.status < 1 %>
+            <%= link_to 'Изменить', edit_order_path(order), :class => 'btn btn-mini' %>
+            <%= link_to 'Удалить', order_path(order), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+          <% end %> 
+          <% if order.status == 1 %>
+            <%= link_to 'Оплатить', pay_for_order_path( order ), :class => 'btn btn-mini btn-success' %>
+          <% end %> 
+        </td>
           <% order.items.each do |items| %>
             <tr>
-              <td></td> 
+              <td>
+                <small> ID<%= items.id %> </small>
+              </td> 
               <td>
                                   
                 <a class="pull-left" href="#">
@@ -44,11 +55,7 @@
               </td>
               <td><%= order_stat(items.status)  %></td>
               <td>
-          <% if items.status < 1 %>
-            <%= link_to 'Изменить', edit_order_path(order), :class => 'btn btn-mini' %>
-            <%= link_to 'Удалить', order_path(order), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
-          <% end %> 
-        </td>
+              </td>
             </tr>
               <% end %>
            
