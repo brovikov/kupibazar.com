@@ -6,6 +6,7 @@
 <% for item in @order.items %>
   <li>
     <%= order_stat (item.status)  %>
+    Статус: <%= item.status  %></br>
     Стоимость товра: <%=h item.value %>, USD</br>
     Наименование товара: <%=h item.name %> </br>
     Рейтинг продавца: <%=h item.seller_rate %> </br>

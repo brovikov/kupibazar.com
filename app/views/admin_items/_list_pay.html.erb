@@ -1,0 +1,65 @@
+<div class = flickr_pagination >
+          <%= will_paginate items, param_name: page_param, container: false %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Статус</th>
+      <th>Дата</th>
+      <th>Название</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% items.each do |item| %>
+        <tr>
+        <td><%= link_to item.id, item_path(item) %></td>
+         <td>
+                <a class="pull-left" href="#">
+                <%= link_to image_tag(item.img, size: "50x50"), item.link  %>
+                </a>
+               <div style="width:100px;">
+                 <small>
+                   Размер: <%= item.size %> <br/>
+                   Цвет: <%= item.color %> 
+                 </small>
+              
+               </div>
+               </td> 
+              <td><%= l item.created_at, format: :short %></td>
+              <td width = '30%'>
+                Клиент: <%= item.order.user.nik %><br/>
+                <%= link_to item.name, item.link %>
+              </td>
+        <td>
+          
+          <h3><strong>$<%= best_in_place item, :value %></strong></h3><br/>
+ 
+        </td>
+          <td><%= best_in_place item, :comment %></td>
+        <td>
+          <% if item.status < 1 %>
+             <%= link_to 'Принять', status_admin_item_path(item), :class => 'btn btn-mini btn-success' %>
+          <% end %> 
+          <% if item.status == 1 %>
+            <%= link_to 'Оплатить принудительно', pay_for_override_admin_item_path(item), :class => 'btn btn-mini' %>
+          <% end %> 
+           <% if item.status == 2 %>
+            <%= link_to 'Выкупить!!!', payd_admin_item_path(item), :class => 'btn btn-mini btn-primary' %>
+          <% end %> 
+          <% if item.status == 2 || 1 %>
+            <%= link_to 'Оклонить', cancel_admin_item_path(item), :class => 'btn btn-mini btn-primary btn-danger' %>
+          <% end %> 
+          </td>
+        </tr>
+   </tbody>
+</table>
+        <iframe src = "<%= item.link %>", height="2000px;", width="110%", align='center'>
+          Произошла ошибка отображения страницы товара
+        </iframe> 
+<% end %>
+<%= render 'layouts/modal' %>

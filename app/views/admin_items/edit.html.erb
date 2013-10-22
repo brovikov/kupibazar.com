@@ -1,0 +1,15 @@
+<h1>Body _edit.html.erb</h1>
+
+
+<%= form_for(@item) do |f| %>
+<%= render 'shared/error_messages',  error: @item  %>
+<div class="span6 offset3">
+
+    <%= f.label :value, 'Стоимость товара:'%>
+    <%= f.text_field :value, class: 'input-small'  %> </br>
+    <%= f.submit "Сохранить изменение" , class: "btn btn-large btn-primary" %><br />
+ 
+</div>
+
+<% end %>
+
