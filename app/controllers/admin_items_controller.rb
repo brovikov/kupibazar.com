@@ -40,7 +40,7 @@ class AdminItemsController < ApplicationController
         format.json { head :no_content }
       end      
   end
-  def pay_for_override
+  def pay_for_override # Принудительная оплата заказа
     @item = Item.find(params[:id])
     if @item.status<2 
     @item.order.update_attributes( status: 2 ) 
@@ -100,11 +100,16 @@ class AdminItemsController < ApplicationController
     end 
   end
   
-  def cancel
+  def cancel                       # Отклонение оплаченного заказа
     @item = Item.find(params[:id])
     respond_to do |format|
         if @item.status == 2
-           current_user.update_attributes( balance: (current_user.balance + (@item.value*10/100 + @item.value)*35.3).round( 2 ) )
+          if @item.havy
+            prcnt = 20
+          else 
+            prcnt = 10
+          end 
+           current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
            @item.update_attributes( status: 9, value: 0 )
            @item.order.save  
            format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
@@ -117,5 +122,38 @@ class AdminItemsController < ApplicationController
         end
     end
   end
+
+def re_check                       # Отправка заказа на повторную проверку
+    @item = Item.find(params[:id])
+    respond_to do |format|
+        if @item.status == 2
+          if @item.havy
+            prcnt = 20
+          else 
+            prcnt = 10
+          end 
+           current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+           @item.update_attributes( status: 0 )
+           @item.order.save  
+           format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+           format.json { head :no_content }       
+        else
+           @item.update_attributes( status: 1 )
+           @item.order.save  
+           format.html { redirect_to list_confirm_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+           format.json { head :no_content }       
+        end
+    end
+  end
+
+  def list_payments
+    @list_payments =  Payment.where( status: [0, 2] ).paginate page: params[:page_items], order: 'created_at desc',
+    per_page: 20
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
 end 
   

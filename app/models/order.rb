@@ -7,7 +7,7 @@
 #  user_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  order_value :integer          default(0)
+#  order_value :decimal(6, 2)    default(0.0)
 #
 
 class Order < ActiveRecord::Base
@@ -27,8 +27,15 @@ class Order < ActiveRecord::Base
          img.link[7..9] = ""
       end
       #  URL example http://ru.aliexpress.com/wholesale?SearchText=654654654&catId=0
-      doc = Nokogiri::HTML(open(img.link))
-      img.img = doc.css('meta')[7]['content'] if img.img.blank?
+      begin
+        doc = Nokogiri::HTML(open(img.link))
+        img.img = doc.css('meta')[7]['content'] if img.img.blank? 
+      rescue
+        img.img = "https://db.tt/kLZjK6hA"
+      end
+      # doc = Nokogiri::HTML(open(img.link)) 
+      # img.img = doc.css('meta')[7]['content'] if img.img.blank?
+      
    end   
   end 
     def parse_rate
@@ -36,12 +43,12 @@ class Order < ActiveRecord::Base
           if rate.link[0,9] == "http://ru" 
              rate.link[7..9] = ""
           end
-        doc = Nokogiri::HTML(open(rate.link))
+        #doc = Nokogiri::HTML(open(rate.link))
         rate.seller_rate = "Best Rate" #("a[class='seller-level-lnk']")['src'] #if img.img.blank?
      end   
    end
   def total_value  
-    self.order_value = (self.items.to_a.sum{|ttl| price(ttl.value, "rub", ttl.count)[:val]}).round( 2 )
+    self.order_value = (self.items.to_a.sum{|ttl| price(ttl, "rub" )[:val]}).round( 2 )
   end 
   
 end

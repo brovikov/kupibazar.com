@@ -16,11 +16,14 @@
 #  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  havy        :boolean          default(FALSE)
+#  order_no    :string(255)
+#  track       :string(255)
 #
 
 class Item < ActiveRecord::Base
   attr_accessible :title, :body, :value, :link, :seller_rate, :img, :color, :size,  :order_id, :id, :created_at, :updated_at,
-  :comment, :status, :count, :name
+  :comment, :status, :count, :name, :havy, :order_no, :track
   attr_accessible :data, :time, :user_id, :value, :comment, :status
   validates :link, presence: true
   validates :name, presence: true

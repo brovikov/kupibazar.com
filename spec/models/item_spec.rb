@@ -16,6 +16,9 @@
 #  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  havy        :boolean          default(FALSE)
+#  order_no    :string(255)
+#  track       :string(255)
 #
 
 require 'spec_helper'

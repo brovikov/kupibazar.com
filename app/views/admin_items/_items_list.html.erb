@@ -29,12 +29,19 @@
               
                </div>
                </td> 
-              <td><%= l item.created_at, format: :short %></td>
-              <td width = '30%'><%= link_to item.name, item.link %></td>
+              <td>
+                <%= l item.created_at, format: :short %>
+                <i class="icon-resize-full"></i> <br/>
+                <%= item.havy %>
+              </td>
+              <td width = '30%'>
+                <i class="icon-user"></i><%= item.order.user.nik %><br/>
+                <%= link_to item.name, item.link %>
+              </td>
         <td>
                 <strong>$<%= item.value %></strong><br/>
-                <small><%= price(item.value, 'rub', item.count)[:str] %></small> <br/>
-                <span class='total_price'><%= price(item.value, 'rub', item.count)[:val] %> руб РФ</span> <br/>
+                <small><%= price( item, 'rub' )[:str] %></small> <br/>
+                <span class='total_price'><%= price( item, 'rub' )[:val] %> руб РФ</span> <br/>
         </td>
         <td><%=item.comment%></td>
         <td>

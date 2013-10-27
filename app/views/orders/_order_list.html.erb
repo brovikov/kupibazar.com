@@ -50,8 +50,8 @@
               <td width = '35%'><%= link_to items.name, items.link %></td>
               <td>
                 <strong>$<%= items.value %></strong><br/>
-                <small><%= price(items.value, 'rub', items.count)[:str] %></small> <br/>
-                <span class='total_price'><%= price(items.value, 'rub', items.count)[:val] %> руб РФ</span> <br/>
+                <small><%= price(items, 'rub' )[:str] %></small> <br/>
+                <span class='total_price'><%= price(items, 'rub')[:val] %> руб РФ</span> <br/>
               </td>
               <td><%= order_stat(items.status)  %></td>
               <td>
