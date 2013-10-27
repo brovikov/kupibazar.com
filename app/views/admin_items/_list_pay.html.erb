@@ -30,13 +30,17 @@
               
                </div>
                </td> 
-              <td><%= l item.created_at, format: :short %></td>
+              <td>
+                <%= l item.created_at, format: :short %><br/>
+                <i class="icon-resize-full"></i> <br/>
+                <%= best_in_place item, :havy, :type => :checkbox, :collection => ["Без доплаты", "С доплатой!"] %>
+              </td>
               <td width = '30%'>
-                Клиент: <%= item.order.user.nik %><br/>
+                <small><i class="icon-user"></i><%= item.order.user.nik %></small><br/>
                 <%= link_to item.name, item.link %>
               </td>
         <td>
-          
+          <h4><strong><%= item.count %> x</strong></h4>
           <h3><strong>$<%= best_in_place item, :value %></strong></h3><br/>
  
         </td>
@@ -49,11 +53,12 @@
             <%= link_to 'Оплатить принудительно', pay_for_override_admin_item_path(item), :class => 'btn btn-mini' %>
           <% end %> 
            <% if item.status == 2 %>
-            <%= link_to 'Выкупить!!!', payd_admin_item_path(item), :class => 'btn btn-mini btn-primary' %>
-          <% end %> 
-          <% if item.status == 2 || 1 %>
-            <%= link_to 'Оклонить', cancel_admin_item_path(item), :class => 'btn btn-mini btn-primary btn-danger' %>
-          <% end %> 
+              <%= link_to 'Выкупить!!!', payd_admin_item_path(item), :class => 'btn btn btn-success' %><br/><br/>
+              <%= link_to 'На согласование', re_check_admin_item_path(item), :class => 'btn btn-mini btn-warning' %><br/>
+           <% end %> 
+           <% if item.status == 2 || 1 %>
+             <%= link_to 'Оклонить', cancel_admin_item_path(item), :class => 'btn btn-mini btn-primary btn-danger' %>
+           <% end %> 
           </td>
         </tr>
    </tbody>

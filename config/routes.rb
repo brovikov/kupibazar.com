@@ -25,6 +25,8 @@ TestApp::Application.routes.draw do
     get :pay_for_override, on: :member
     get :list_pay, on: :collection  
     get :list_confirm, on: :collection
+    get :list_payments, on: :collection
+    get :re_check, on: :member
   end
   
   # The priority is based upon order of creation:

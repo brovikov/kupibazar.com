@@ -1,0 +1,42 @@
+<div class = flickr_pagination >
+          <%= will_paginate payments, param_name: page_param , container: false %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Статус</th>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% payments.each do |payment| %>
+      <tr>
+        <td><%= link_to payment.id, payment_path(payment) %></td>
+        <td><%= best_in_place payment, :status, :type => :select, :collection => [[0, "На согласовании"], [1, "Согласован"], [2, "Проблемный"]] %>    </td>
+        <td><%= l payment.data, format: :dt %></td>
+        <td><%= l payment.time, format: :tm %></td>
+        <td><strong><%= best_in_place payment, :value %></strong></td>
+        <td width = '40%'>
+          <i class="icon-user"></i><%= payment.user.nik %><br/>
+          <%= best_in_place payment, :comment %><br/>
+        </td>
+        <td>
+          <% if payment.status < 1 %>
+            <%= link_to 'Принять', status_payment_path(payment), :class => 'btn btn btn-success' %>
+            <%= link_to 'Удалить', payment_path(payment), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+          <% end %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate payments, param_name: page_param , container: false %>
+</div>
+

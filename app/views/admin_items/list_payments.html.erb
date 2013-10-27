@@ -1,0 +1,11 @@
+<h1>Оплаты на согласование:</h1>
+
+  <div id="payments">
+    <%= render partial: 'list_payments', locals: { payments: @list_payments, page_param: 'page_payments' } %>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>
