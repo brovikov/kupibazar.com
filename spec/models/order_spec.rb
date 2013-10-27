@@ -7,7 +7,7 @@
 #  user_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  order_value :integer          default(0)
+#  order_value :decimal(6, 2)    default(0.0)
 #
 
 require 'spec_helper'

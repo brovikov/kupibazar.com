@@ -11,22 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008102309) do
+ActiveRecord::Schema.define(:version => 20131022195524) do
 
   create_table "items", :force => true do |t|
-    t.decimal  "value",       :precision => 6, :scale => 2,                :null => false
-    t.string   "link",                                                     :null => false
-    t.string   "name",                                                     :null => false
-    t.string   "seller_rate",                                              :null => false
-    t.string   "img",                                                      :null => false
+    t.decimal  "value",       :precision => 6, :scale => 2,                    :null => false
+    t.string   "link",                                                         :null => false
+    t.string   "name",                                                         :null => false
+    t.string   "seller_rate",                                                  :null => false
+    t.string   "img",                                                          :null => false
     t.string   "color"
     t.string   "size"
-    t.integer  "order_id",                                                 :null => false
+    t.integer  "order_id",                                                     :null => false
     t.string   "comment"
-    t.integer  "status",                                    :default => 0, :null => false
-    t.integer  "count",                                     :default => 1, :null => false
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.integer  "status",                                    :default => 0,     :null => false
+    t.integer  "count",                                     :default => 1,     :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+    t.boolean  "havy",                                      :default => false
+    t.string   "order_no"
+    t.string   "track"
   end
 
   add_index "items", ["order_id", "created_at", "id"], :name => "index_items_on_order_id_and_created_at_and_id"
