@@ -65,7 +65,7 @@ class AdminItemsController < ApplicationController
   end   
   
   def list_confirm
-    @items_for_confirm =  Item.where( status: 0 ).paginate page: params[:page_items], order: 'created_at desc',
+    @items_for_confirm =  Item.where( status: 0 ).paginate page: params[:page], order: 'created_at desc',
     per_page: 1
     respond_to do |format|
       format.html
@@ -147,8 +147,17 @@ def re_check                       # Отправка заказа на повт
   end
 
   def list_payments
-    @list_payments =  Payment.where( status: [0, 2] ).paginate page: params[:page_items], order: 'created_at desc',
-    per_page: 20
+    @list_payments =  Payment.where( status: [0, 2] ).paginate page: params[:page_payments], order: 'created_at desc',
+    per_page: 2
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def list_lotts
+    @list_lotts =  Lott.where( status: 0 ).paginate page: params[:page_lotts], order: 'created_at desc',
+    order: 'lot_number desc', per_page: 2
     respond_to do |format|
       format.html
       format.js

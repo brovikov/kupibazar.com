@@ -32,5 +32,6 @@ class User < ActiveRecord::Base
   validates(:nik, presence: true)
   has_many :payments
   has_many :orders
+  has_many :lotts
   accepts_nested_attributes_for :orders
   end

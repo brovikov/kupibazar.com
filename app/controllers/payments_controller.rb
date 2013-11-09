@@ -74,8 +74,8 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
     respond_to do |format|
       if @payment.update_attributes(status: 1) 
-        current_user.update_attributes(balance: current_user.balance + @payment.value)
-          format.html { redirect_to payments_url, notice: 'Статус пополнения баланса успешно обновлен.' }
+        @payment.user.update_attributes(balance: @payment.user.balance + @payment.value)
+        format.html { redirect_to list_payments_admin_items_url, notice: 'Статус пополнения баланса успешно обновлен.' }
           format.json { head :no_content }
       else
         format.html { render action: "edit" }

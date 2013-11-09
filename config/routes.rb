@@ -6,6 +6,9 @@ TestApp::Application.routes.draw do
   get "static_pages/faq"
   get "static_pages/about"
   root to: 'products#index'
+  resources :lotts do
+    get :status, on: :member
+  end
   resources :products
   resources :users
   resources :orders do
@@ -26,6 +29,7 @@ TestApp::Application.routes.draw do
     get :list_pay, on: :collection  
     get :list_confirm, on: :collection
     get :list_payments, on: :collection
+    get :list_lotts, on: :collection
     get :re_check, on: :member
   end
   
