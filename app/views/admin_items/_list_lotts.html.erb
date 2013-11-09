@@ -1,0 +1,53 @@
+<div class = flickr_pagination >
+          <%= will_paginate lotts, param_name: page_param , container: false %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Дата</th>
+      <th>Статус</th>
+      <th>Номер ЛОТА</th>
+      <th>Название</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% lotts.each do |lott| %>
+      <tr>
+        <td><%= link_to lott.id, lott_path(lott) %></td>
+        <td><%= l lott.created_at, format: :short %><br/></td>
+        <td><%= best_in_place lott, :status, :type => :select, 
+          :collection => [[0, "На согласовании"], [7, "Выкуплен"], [9, "Отклонен"]] %>    </td>
+        <td>
+          <%= best_in_place lott, :lot_number %>
+           <small>
+              Размер: <%= lott.size %> <br/>
+              Цвет: <%= lott.color %> 
+           </small>
+        </td>
+        <td><%= lott.name %></td>
+        <td><%= best_in_place lott, :value %> руб. РФ</td>
+        <td width = '30%'>
+          <i class="icon-user"></i><%= lott.user.nik %><br/>
+          <%= best_in_place lott, :comment %>
+        </td>
+        <td>
+          <% if lott.status < 1 %>
+            <%= link_to 'Принять', status_lott_path(lott), :class => 'btn btn btn-success' %>
+            <%= link_to 'Изменить', edit_lott_path(lott), :class => 'btn btn-mini' %>
+            <%= link_to 'Удалить', lott_path(lott), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+          <% end %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate lotts, param_name: page_param , container: false %>
+</div>
+
+

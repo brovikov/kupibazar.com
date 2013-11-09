@@ -1,0 +1,40 @@
+<div class = flickr_pagination >
+          <%= will_paginate lott_pr, param_name: page_param , container: false %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Статус</th>
+      <th>Номер ЛОТА</th>
+      <th>Название</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% lott_pr.each do |lott| %>
+      <tr>
+        <td><%= link_to lott.id, lott_path(lott) %></td>
+        <td><%= order_stat (lott.status)  %>    </td>
+        <td><%= lott.lot_number %></td>
+        <td><%= lott.name %></td>
+        <td><%= lott.value %> руб. РФ</td>
+        <td width = '40%'><%= lott.comment %></td>
+        <td>
+          <% if lott.status < 1 %>
+            <%= link_to 'Изменить', edit_lott_path(lott), :class => 'btn btn-mini' %>
+            <%= link_to 'Удалить', lott_path(lott), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
+          <% end %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate lott_pr, param_name: page_param , container: false %>
+</div>
+
+

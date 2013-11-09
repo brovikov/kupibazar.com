@@ -24,7 +24,7 @@
 class Item < ActiveRecord::Base
   attr_accessible :title, :body, :value, :link, :seller_rate, :img, :color, :size,  :order_id, :id, :created_at, :updated_at,
   :comment, :status, :count, :name, :havy, :order_no, :track
-  attr_accessible :data, :time, :user_id, :value, :comment, :status
+#  attr_accessible :data, :time, :user_id, :value, :comment, :status
   validates :link, presence: true
   validates :name, presence: true
   validates :seller_rate, presence: true
