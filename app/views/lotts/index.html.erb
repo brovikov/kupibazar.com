@@ -1,0 +1,36 @@
+<h1>Мои списания за сборные ЛОТЫ:</h1>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">Все мои ЛОТЫ</a></li>
+    <li><a href="#pane2" data-toggle="tab">Мои ЛОТЫ на согласовании</a></li>
+    <li><a href="#pane3" data-toggle="tab">Мои оплаченные ЛОТЫ</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+      <div id="lotts">
+        <%= render partial: 'lotts_list', locals: { lott_pr: @lott, page_param: 'page_full' } %>
+
+      </div>
+      
+    </div>
+    <div id="pane2" class="tab-pane">
+       
+      <div id="lotts_nacc">
+           <%= render partial: 'lotts_list', locals: { lott_pr: @lott_nacc, page_param: 'page_nacc' } %>
+      </div>
+    </div>
+    <div id="pane3" class="tab-pane">
+      <div id="lotts_acc">
+        <%= render partial: 'lotts_list', locals: { lott_pr: @lott_acc, page_param: 'page_acc' } %>
+      </div>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
+
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>

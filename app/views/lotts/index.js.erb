@@ -1,0 +1,5 @@
+$('#lotts').html('<%=escape_javascript(render(:partial => "lotts_list", locals: { lott_pr: @lott, page_param: 'page_full' }))%>');
+$('#lotts_nacc').html('<%=escape_javascript(render(:partial => "lotts_list", locals: { lott_pr: @lott_nacc, page_param: 'page_nacc' }))%>');
+$('#lotts_acc').html('<%=escape_javascript(render(:partial => "lotts_list", locals: { lott_pr: @lott_acc, page_param: 'page_acc' }))%>');
+
+$('.flickr_pagination a').attr('data-remote', 'true');

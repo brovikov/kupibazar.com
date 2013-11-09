@@ -1,0 +1,10 @@
+<h1> Участие в ЛОТЕ </h1>
+  
+  <%= order_stat (@lott.status)  %>
+  
+
+  ID Транзакции: FT<%= @lott.id %> </br>
+  Номер ЛОТА: <%= @lott.lot_number %> </br>
+  Сумма: <%= @lott.value %> руб. РФ</br> 
+  Пользователь: <%= @lott.user.nik %> </br>
+  Коментарий: <%= @lott.comment %> </br>
