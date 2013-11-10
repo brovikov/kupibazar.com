@@ -22,7 +22,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: c00049_test_app
+  database: c00049_test_app1
   pool: 5
   username: c00049
   password: CzdedUE6
