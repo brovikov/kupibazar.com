@@ -1,4 +1,4 @@
-# coding: utf-8 
+# -*- encoding : utf-8 -*-
 module ApplicationHelper
   def price (item, currency )
     val_first = item.value

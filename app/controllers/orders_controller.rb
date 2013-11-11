@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class OrdersController < ApplicationController
   # для получения контента через http
   require 'open-uri'

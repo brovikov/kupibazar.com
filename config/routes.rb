@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 TestApp::Application.routes.draw do
   #get "payments/new"
 
