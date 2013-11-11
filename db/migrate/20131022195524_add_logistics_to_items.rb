@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddLogisticsToItems < ActiveRecord::Migration
   def change
     add_column :items, :havy, :boolean, :default => 0

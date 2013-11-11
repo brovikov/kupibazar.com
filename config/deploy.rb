@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #=== REQUIRE ===#
 #require 'rvm/capistrano'
 #set :rvm_type,        :user

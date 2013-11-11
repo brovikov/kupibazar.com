@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddNikToUsers < ActiveRecord::Migration
   def change
     add_column :users, :nik, :string 

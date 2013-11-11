@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateLotts < ActiveRecord::Migration
   def change
     create_table :lotts do |t|
