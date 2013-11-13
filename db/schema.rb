@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109155524) do
+ActiveRecord::Schema.define(:version => 20131113212716) do
 
   create_table "items", :force => true do |t|
     t.decimal  "value",       :precision => 6, :scale => 2,                    :null => false
@@ -95,8 +95,13 @@ ActiveRecord::Schema.define(:version => 20131109155524) do
     t.datetime "updated_at",                                                            :null => false
     t.string   "nik"
     t.decimal  "balance",                :precision => 6, :scale => 2, :default => 0.0, :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
