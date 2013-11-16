@@ -61,8 +61,6 @@ module TestApp
     config.assets.version = '1.0'
 
     config.secret_token = 'f595a80d71d205492d24a77cd0c7e5087293917b00c308b06b8ddd2518c43ab5715cff07aec669773cef4b0ff3124796243a935153db87945e8beb10d849e430'
-    
-    config.i18n.default_locale = :ru
-    
+    config.action_controller.include_all_helpers = false
   end
 end

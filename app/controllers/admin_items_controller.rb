@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class AdminItemsController < ApplicationController
+    authorize_resource :class => false
     include ApplicationHelper
   
   def index

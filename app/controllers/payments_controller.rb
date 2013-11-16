@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PaymentsController < ApplicationController
+    load_and_authorize_resource #cancan
   def show
     @payment = Payment.find(params[:id])
   end

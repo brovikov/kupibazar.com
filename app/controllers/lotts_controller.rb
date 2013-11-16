@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class LottsController < ApplicationController
+    load_and_authorize_resource #cancan
 
   def show
     @lott = Lott.find(params[:id])

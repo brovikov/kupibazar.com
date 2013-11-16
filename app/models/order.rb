@@ -34,6 +34,9 @@ class Order < ActiveRecord::Base
       rescue
         img.img = "https://db.tt/kLZjK6hA"
       end
+      if img.img[img.img.length-3,img.img.length-1] != "jpg"
+        img.img = "https://db.tt/kLZjK6hA"  
+      end
       # doc = Nokogiri::HTML(open(img.link)) 
       # img.img = doc.css('meta')[7]['content'] if img.img.blank?
       
