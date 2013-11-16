@@ -11,6 +11,8 @@ gem 'magic_encoding'
     
 gem 'bcrypt-ruby', '3.0.1'
 gem 'devise'
+gem 'cancan'
+gem 'role_model'
 gem 'i18n'
 gem "devise-russian", "~> 2.0.1.1"
 gem 'will_paginate', '~> 3.0.0'

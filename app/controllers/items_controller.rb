@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
  class ItemsController < ApplicationController
+     load_and_authorize_resource #cancan
  respond_to :html, :json 
 
   
