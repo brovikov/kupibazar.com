@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PurchasesController < ApplicationController
-  
+    load_and_authorize_resource #cancan
   def new
     @purchase = Purchase.new
 #    respond_to do |format|

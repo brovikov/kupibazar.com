@@ -1,11 +1,13 @@
 # -*- encoding : utf-8 -*-
 class OrdersController < ApplicationController
+  load_and_authorize_resource #cancan
   # для получения контента через http
   require 'open-uri'
   # подключаем Nokogiri
   require 'nokogiri'
   include ApplicationHelper
-  
+   # before_filter :authenticate_user!
+ 
   def index
     @order= current_user.orders.paginate page: params[:page_full], order: 'created_at desc',
     per_page: 20

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113212716) do
+ActiveRecord::Schema.define(:version => 20131116173400) do
 
   create_table "items", :force => true do |t|
     t.decimal  "value",       :precision => 6, :scale => 2,                    :null => false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20131113212716) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.integer  "roles_mask"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
