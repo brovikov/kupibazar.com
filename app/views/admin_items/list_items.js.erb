@@ -1,0 +1,5 @@
+$('#items_confirm').html('<%=escape_javascript(render(:partial => "list_items", 
+  locals: { items: @items, page_param: 'page'  }))%>');
+
+$('.flickr_pagination a').attr('data-remote', 'true');
+

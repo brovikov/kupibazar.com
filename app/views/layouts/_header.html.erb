@@ -7,7 +7,21 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", '#' %></li>
           <% if user_signed_in? %>
-
+          <% if can? :manage, :admin_items %>
+           <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Admin <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Проверка ед. заказов", list_confirm_admin_items_path %></li>
+                <li><%= link_to "Закупка ед. заказов", list_pay_admin_items_path %></li>
+                <li><%= link_to "Оплаты на согласование", list_payments_admin_items_path %></li>
+                <li><%= link_to "Лоты на согласование", list_lotts_admin_items_path %></li>
+                <li><%= link_to "Все Лоты", list_lotts_all_admin_items_path %></li>
+                <li><%= link_to "Номера заказов", list_items_admin_items_path %></li>
+              </ul>
+            </li>
+           <% end %>
           <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Пополнение <b class="caret"></b>
