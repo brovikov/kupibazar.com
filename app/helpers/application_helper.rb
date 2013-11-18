@@ -28,7 +28,7 @@ module ApplicationHelper
       end 
     result = value*c.round( 2 )
     
-    {val: result.round( 2), str:curr_str}
+    {val: result.round( 2 ), str:curr_str}
   end
 
   def order_stat (status)

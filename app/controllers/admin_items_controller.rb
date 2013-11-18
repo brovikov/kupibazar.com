@@ -111,11 +111,19 @@ class AdminItemsController < ApplicationController
           else 
             prcnt = 10
           end 
-           current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
-           @item.update_attributes( status: 9, value: 0 )
-           @item.order.save  
-           format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-           format.json { head :no_content }       
+          if @item.value > 10 
+              current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+              @item.update_attributes( status: 9, value: 0 )
+              @item.order.save  
+              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+              format.json { head :no_content }       
+          else 
+              current_user.update_attributes( balance: (current_user.balance + (@item.value + 1)*35.3).round( 2 ) )
+              @item.update_attributes( status: 9, value: 0 )
+              @item.order.save  
+              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+              format.json { head :no_content }       
+          end
         else
            @item.update_attributes( status: 9, value: 0 )
            @item.order.save  
@@ -134,11 +142,20 @@ def re_check                       # Отправка заказа на повт
           else 
             prcnt = 10
           end 
-           current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
-           @item.update_attributes( status: 0 )
-           @item.order.save  
-           format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-           format.json { head :no_content }       
+          if @item.value > 10 
+              current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+              @item.update_attributes( status: 0 )
+              @item.order.save  
+              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+              format.json { head :no_content }       
+          else 
+              current_user.update_attributes( balance: (current_user.balance + (@item.value + 1)*35.3).round( 2 ) )
+              @item.update_attributes( status: 0 )
+              @item.order.save  
+              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+              format.json { head :no_content }       
+          end
+    
         else
            @item.update_attributes( status: 1 )
            @item.order.save  
