@@ -8,6 +8,7 @@ gem 'nested_form', :git => 'https://github.com/ryanb/nested_form.git'
 gem 'best_in_place'
 gem 'magic_encoding'
 
+
     
 gem 'bcrypt-ruby', '3.0.1'
 gem 'devise'
