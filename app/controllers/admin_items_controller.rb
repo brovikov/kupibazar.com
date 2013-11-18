@@ -159,12 +159,29 @@ def re_check                       # Отправка заказа на повт
   
   def list_lotts
     @list_lotts =  Lott.where( status: 0 ).paginate page: params[:page_lotts], order: 'created_at desc',
-    order: 'lot_number desc', per_page: 2
+    order: 'lot_number desc', per_page: 20
     respond_to do |format|
       format.html
       format.js
     end
   end
+  def list_lotts_all
+    @list_lotts =  Lott.paginate page: params[:page_lotts], order: 'created_at desc',
+    per_page: 20
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def list_items
+    @items =  Item.where( status: 7 ).paginate page: params[:page_items], order: 'created_at desc',
+    per_page: 20
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end   
   
 end 
   

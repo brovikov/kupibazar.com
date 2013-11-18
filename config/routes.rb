@@ -31,6 +31,8 @@ TestApp::Application.routes.draw do
     get :list_confirm, on: :collection
     get :list_payments, on: :collection
     get :list_lotts, on: :collection
+    get :list_lotts_all, on: :collection
+    get :list_items, on: :collection
     get :re_check, on: :member
   end
   

@@ -1,0 +1,11 @@
+<h1>Индивидуальные заказы:</h1>
+
+  <div id="items_confirm">
+    <%= render partial: 'list_items', locals: { items: @items, page_param: 'page' } %>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>
