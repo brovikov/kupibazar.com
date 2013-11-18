@@ -66,12 +66,12 @@ TestApp::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.i18n.available_locales = :ru
-  config.action_mailer.default_url_options = {:host => 'colorit.od.ua'}
+  config.action_mailer.default_url_options = {:host => 'kupibazar.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => 'colorit.od.ua',    
+    :domain               => 'kupibazar.com',    
     :user_name            => 'kupibazar@gmail.com',
     :password             => 'kupislona78',
     :authentication       => 'plain',
