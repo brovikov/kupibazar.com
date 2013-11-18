@@ -1,5 +1,7 @@
-<p>Welcome <%= @email %>!</p>
+<p>Добро пожаловать на Купибазар! <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Вам необходимо подтвердить Ваш аккаунт перейдя по ссылке:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to 'Подтвердить мой Аккаунт на kupibazar.com', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<p>С уважением, команда kupibazar.com</p>
