@@ -1,0 +1,46 @@
+<div class = flickr_pagination >
+          <%= will_paginate items, param_name: page_param, container: false %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th></th>
+      <th>Дата</th>
+      <th>Сумма</th>
+      <th>№ Заказа</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% items.each do |item| %>
+        <tr>
+        <td><%= link_to item.id, item_path(item) %></td>
+         <td>
+                <a class="pull-left" href="#">
+                <%= link_to image_tag(item.img, size: "50x50"), item.link  %>
+                </a>
+               <div style="width:100px;">
+                 <small>
+                   Размер: <%= item.size %> <br/>
+                   Цвет: <%= item.color %> 
+                 </small>
+              
+               </div>
+               </td> 
+              <td>
+                <%= l item.created_at, format: :short %><br/>
+              </td>
+        <td>
+          <h4><strong><%= item.count %> x</strong></h4>
+          <h3><strong>$<%= best_in_place item, :value %></strong></h3><br/>
+ 
+        </td>
+          <td><%= best_in_place item, :order_no %></td>
+        </tr>
+    <% end %>
+   </tbody>
+</table>
+
+
+

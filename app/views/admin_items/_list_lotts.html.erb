@@ -37,7 +37,6 @@
         <td>
           <% if lott.status < 1 %>
             <%= link_to 'Принять', status_lott_path(lott), :class => 'btn btn btn-success' %>
-            <%= link_to 'Изменить', edit_lott_path(lott), :class => 'btn btn-mini' %>
             <%= link_to 'Удалить', lott_path(lott), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
           <% end %> 
         </td>
