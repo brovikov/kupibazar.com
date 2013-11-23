@@ -31,7 +31,9 @@
         <td><%= lott.name %></td>
         <td><%= best_in_place lott, :value %> руб. РФ</td>
         <td width = '30%'>
-          <i class="icon-user"></i><%= lott.user.nik %><br/>
+          <i class="icon-user"></i>
+          <%= lott.user.nik %>
+          <small>| <%= lott.user.balance %> |</small><br/>
           <%= best_in_place lott, :comment %>
         </td>
         <td>
