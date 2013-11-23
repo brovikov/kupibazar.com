@@ -13,3 +13,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/config/environments/production.rb
+**.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb

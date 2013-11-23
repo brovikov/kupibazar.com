@@ -5,11 +5,11 @@ class AdminItemsController < ApplicationController
   
   def index
     @items = Item.paginate page: params[:page_full], order: 'created_at desc',
-    per_page: 2
+    per_page: 30
     @items_acc= Item.where( status: 1 ).paginate page: params[:page_acc], order: 'created_at desc',
-    per_page: 2
+    per_page: 30
     @items_nacc= Item.where( status: 0 ).paginate page: params[:page_nacc], order: 'created_at desc',
-    per_page: 2
+    per_page: 30
 
     respond_to do |format|
       format.html
@@ -175,8 +175,8 @@ def re_check                       # Отправка заказа на повт
   end
   
   def list_lotts
-    @list_lotts =  Lott.where( status: 0 ).paginate page: params[:page_lotts], order: 'created_at desc',
-    order: 'lot_number desc', per_page: 20
+    @list_lotts =  Lott.where( status: 0 ).paginate page: params[:page_lotts], order: 'lot_number desc',
+    order: 'created_at desc', per_page: 30
     respond_to do |format|
       format.html
       format.js
