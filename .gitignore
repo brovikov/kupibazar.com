@@ -17,4 +17,8 @@
 **.orig
 rerun.txt
 pickle-email-*.html
+<<<<<<< HEAD
 config/initializers/secret_token.rb
+=======
+/config/initializers/secret_token.rb
+>>>>>>> 79b04cfba314ad5d367ef4e6af88fa61789a91d9

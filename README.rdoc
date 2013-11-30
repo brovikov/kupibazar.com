@@ -1,2 +1,6 @@
 My readme file UP TO DATE
+<<<<<<< HEAD
 v1.0.1
+=======
+v1.0.1 - Updated gitignore file
+>>>>>>> 79b04cfba314ad5d367ef4e6af88fa61789a91d9
