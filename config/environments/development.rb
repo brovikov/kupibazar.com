@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 TestApp::Application.configure do
+<<<<<<< HEAD
   # Settings specified here will take precedence over those in config/application.rb
+=======
+  # Settings specified here will take precedence over those in config/application.rb ***
+>>>>>>> 9050d46817426495463b09b87021426a20ca97d9
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
