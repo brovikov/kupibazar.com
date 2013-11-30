@@ -1,6 +1,11 @@
 My readme file UP TO DATE
 <<<<<<< HEAD
+<<<<<<< HEAD
 v1.0.1
 =======
 v1.0.1 - Updated gitignore file
 >>>>>>> 79b04cfba314ad5d367ef4e6af88fa61789a91d9
+=======
+v1.0.1 - Updated gitignore file
+v1.0.2
+>>>>>>> 5436658c56d33532590593cd7be42ecf2e048d9b
