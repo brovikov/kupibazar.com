@@ -1,2 +1,2 @@
 My readme file UP TO DATE
-v1.0.1
+v1.0.1 - Updated gitignore file
