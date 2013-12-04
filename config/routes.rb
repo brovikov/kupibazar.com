@@ -6,6 +6,7 @@ TestApp::Application.routes.draw do
 
   get "static_pages/faq"
   get "static_pages/about"
+  get "help", to: "static_pages#help"
   root to: 'StaticPages#about'
   resources :lotts do
     get :status, on: :member

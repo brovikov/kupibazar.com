@@ -1,5 +1,5 @@
 <h2> Персональная страница <%= @user.email %> </h2>
 
-Ваш Ник на одноклассниках: <%= @user.nik %> </br>
+Ваш Ник на одноклассниках: <%= best_in_place @user, :nik %> </br>
 Ваш Баланс:  <span class="price"><%= number_to_currency(@user.balance) %></span></br> </br> 
 

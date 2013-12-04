@@ -1,2 +1,8 @@
-$('#items').html('<%=escape_javascript(render(:partial => "list_pay", locals: { items: @items_for_pay, param_name: page_param  }))%>');
+$('#items_nacc').html('<%=escape_javascript(render(:partial => "items_list", 
+    locals: { payment_pr: @items_nacc, page_param: 'page_nacc'  }))%>');
+$('#items').html('<%=escape_javascript(render(:partial => "items_list", 
+  locals: { payment_pr: @items, page_param: 'page_full'  }))%>');
+$('#items_acc').html('<%=escape_javascript(render(:partial => "items_list", 
+      locals: { payment_pr: @items_acc, page_param: 'page_acc'  }))%>');
 
+$('.flickr_pagination a').attr('data-remote', 'true');

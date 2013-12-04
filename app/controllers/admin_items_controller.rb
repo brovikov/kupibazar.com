@@ -50,8 +50,8 @@ class AdminItemsController < ApplicationController
           order.items.each do |item|  
           item.update_attributes( status: 2 )
         end
-        current_user.update_attributes( balance: current_user.balance - @item.order.order_value )
-        redirect_to orders_url, notice: 'Статус заказа успешно обновлен.'
+        @item.order.user.update_attributes( balance: @item.order.user.balance - @item.order.order_value )
+        redirect_to admin_items_url, notice: 'Статус заказа успешно обновлен.'
     else 
       redirect_to admin_items_url, notice: 'Как-то странно оплачивать дважды...'
     end 
@@ -112,13 +112,14 @@ class AdminItemsController < ApplicationController
             prcnt = 10
           end 
           if @item.value > 10 
-              current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+              #current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )           
               @item.update_attributes( status: 9, value: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
               format.json { head :no_content }       
           else 
-              current_user.update_attributes( balance: (current_user.balance + (@item.value + 1)*35.3).round( 2 ) )
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value + 1)*35.3).round( 2 ) )
               @item.update_attributes( status: 9, value: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
@@ -143,13 +144,13 @@ def re_check                       # Отправка заказа на повт
             prcnt = 10
           end 
           if @item.value > 10 
-              current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
               @item.update_attributes( status: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
               format.json { head :no_content }       
           else 
-              current_user.update_attributes( balance: (current_user.balance + (@item.value + 1)*35.3).round( 2 ) )
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value + 1)*35.3).round( 2 ) )
               @item.update_attributes( status: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
@@ -167,7 +168,7 @@ def re_check                       # Отправка заказа на повт
 
   def list_payments
     @list_payments =  Payment.where( status: [0, 2] ).paginate page: params[:page_payments], order: 'created_at desc',
-    per_page: 2
+    per_page: 30
     respond_to do |format|
       format.html
       format.js
@@ -176,7 +177,7 @@ def re_check                       # Отправка заказа на повт
   
   def list_lotts
     @list_lotts =  Lott.where( status: 0 ).paginate page: params[:page_lotts], order: 'lot_number desc',
-    order: 'created_at desc', per_page: 30
+    per_page: 30
     respond_to do |format|
       format.html
       format.js
@@ -184,7 +185,7 @@ def re_check                       # Отправка заказа на повт
   end
   def list_lotts_all
     @list_lotts =  Lott.paginate page: params[:page_lotts], order: 'created_at desc',
-    per_page: 20
+    per_page: 30
     respond_to do |format|
       format.html
       format.js
@@ -193,7 +194,7 @@ def re_check                       # Отправка заказа на повт
   
   def list_items
     @items =  Item.where( status: 7 ).paginate page: params[:page_items], order: 'created_at desc',
-    per_page: 20
+    per_page: 3
     respond_to do |format|
       format.html
       format.js
