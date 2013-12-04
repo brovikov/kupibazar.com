@@ -194,7 +194,7 @@ def re_check                       # Отправка заказа на повт
   
   def list_items
     @items =  Item.where( status: 7 ).paginate page: params[:page_items], order: 'created_at desc',
-    per_page: 3
+    per_page: 60
     respond_to do |format|
       format.html
       format.js
