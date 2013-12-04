@@ -5,7 +5,7 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Help", '#' %></li>
+          <li><%= link_to "Help", help_path %></li>
           <% if user_signed_in? %>
           <% if can? :manage, :admin_items %>
            <li id="fat-menu" class="dropdown">
@@ -18,6 +18,7 @@
                 <li><%= link_to "Оплаты на согласование", list_payments_admin_items_path %></li>
                 <li><%= link_to "Лоты на согласование", list_lotts_admin_items_path %></li>
                 <li><%= link_to "Все Лоты", list_lotts_all_admin_items_path %></li>
+                <li><%= link_to "Все Заказы", admin_items_path %></li>
                 <li><%= link_to "Номера заказов", list_items_admin_items_path %></li>
               </ul>
             </li>
