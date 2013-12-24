@@ -2,6 +2,16 @@
  class ItemsController < ApplicationController
      load_and_authorize_resource #cancan
  respond_to :html, :json 
+   
+   def index
+     
+     @item= Item.search(params[:search])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   
    def update

@@ -6,6 +6,7 @@ TestApp::Application.routes.draw do
 
   get "static_pages/faq"
   get "static_pages/about"
+  get "static_pages/contacts"
   get "help", to: "static_pages#help"
   root to: 'StaticPages#about'
   resources :lotts do
@@ -28,6 +29,7 @@ TestApp::Application.routes.draw do
     get :payd, on: :member
     get :cancel, on: :member
     get :pay_for_override, on: :member
+    get :na_sklade, on: :member
     get :list_pay, on: :collection  
     get :list_confirm, on: :collection
     get :list_payments, on: :collection
