@@ -36,7 +36,9 @@
               </td>
               <td width = '30%'>
                 <i class="icon-user"></i><%= item.order.user.nik %><br/>
-                <%= link_to item.name, item.link %>
+                <%= link_to item.name, item.link %><br/>
+                <%= item.order_no %><br/>
+                <%= order_stat(item.status)  %>
               </td>
         <td>
                 <strong>$<%= item.value %></strong><br/>
