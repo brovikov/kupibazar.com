@@ -201,5 +201,11 @@ def re_check                       # Отправка заказа на повт
     end
   end   
   
+  def na_sklade # Принудительная оплата заказа
+    @item = Item.find(params[:id])
+    @item.update_attributes( status: 8 )
+    redirect_to items_url, notice: 'Статус заказа успешно обновлен.'
+  end
+  
 end 
   

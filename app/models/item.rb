@@ -34,4 +34,12 @@ class Item < ActiveRecord::Base
   validates_numericality_of :value, greater_than_or_equal_to: 0, message: 'Сумма - только цифры, разделитель - точка, например: 288.80' 
   validates :comment, :length => { :maximum => 255 }
   belongs_to :order
+  
+  def self.search(search)
+  if search
+    find(:all, :conditions => ['order_no LIKE ?' , "%#{search}%"]  )
+  else
+    find(:all, :conditions => ['order_no LIKE ?' , "111"]  )
+  end
+end
  end

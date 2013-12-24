@@ -43,6 +43,8 @@ module ApplicationHelper
         '<span class="label label-important"> Отклонен </span></br>'.html_safe
       when status == 7 
         '<span class="label label-success"> Выкуплен </span></br>'.html_safe
+      when status == 8 
+        '<span class="label label-success"> На складе </span></br>'.html_safe
       end     
   end
   
