@@ -28,6 +28,7 @@
         <td>
           <% if payment.status < 1 %>
             <%= link_to 'Принять', status_payment_path(payment), :class => 'btn btn btn-success' %>
+            <%= link_to 'Проблемный', status_problem_payment_path(payment), :class => 'btn btn btn-mini' %>
             <%= link_to 'Удалить', payment_path(payment), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
           <% end %> 
         </td>
