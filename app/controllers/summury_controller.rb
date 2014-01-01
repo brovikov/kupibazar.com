@@ -1,4 +1,5 @@
 class SummuryController < ApplicationController
+      load_and_authorize_resource #cancan
   def totals
     @user_cnt = @user_blc = @item = @item_cash = @item_lm = @item_cash_lm = @item_lm1 = @item_cash_lm1 = 0
     @lott = @lott_cash = @lott_lm = @lott_cash_lm = @lott_lm1 = @lott_cash_lm1 = 0
