@@ -35,7 +35,7 @@ class SummuryController < ApplicationController
       if lott.value < 350.3 
         @lott_cash += 1
       else
-        @lott_cash += item.value*10/100/35.3 
+        @lott_cash += lott.value*10/100/35.3 
       end
     end  
      Lott.where( status: [ 2 ], created_at: (Time.now.midnight - 1.month)..Time.now ).each do |lott| # Всего оформлено Лотов за последний месяц
@@ -43,7 +43,7 @@ class SummuryController < ApplicationController
       if lott.value < 350.3 
         @lott_cash_lm += 1
       else
-        @lott_cash_lm += item.value*10/100/35.3 
+        @lott_cash_lm += lott.value*10/100/35.3 
       end
     end  
       Lott.where( status: [ 2 ], created_at: (Time.now.midnight - 2.month)..(Time.now.midnight- 1.month) ).each do |lott| # Всего оформлено Лотов за предыдущий месяц
@@ -51,7 +51,7 @@ class SummuryController < ApplicationController
       if lott.value < 350.3 
         @lott_cash_lm1 += 1
       else
-        @lott_cash_lm1 += item.value*10/100/35.3 
+        @lott_cash_lm1 += lott.value*10/100/35.3 
       end
     end  
   end
