@@ -9,6 +9,6 @@ class AdminNotify < ActionMailer::Base
   def nasklade (item)
     @item = item
 
-    mail to: item.user.email, subject: "Заказ, оформленный Вами на kupibazar.com уже на нашем складе"
+    mail to: item.order.user.email, subject: "Заказ, оформленный Вами на kupibazar.com уже на нашем складе"
   end
 end
