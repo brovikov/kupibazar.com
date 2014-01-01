@@ -86,6 +86,22 @@ class PaymentsController < ApplicationController
       end
     end      
   end
+  
+  def status_problem
+    @payment = Payment.find(params[:id])
+    respond_to do |format|
+      if @payment.update_attributes(status: 2) 
+          format.html { redirect_to list_payments_admin_items_url, notice: 'Статус пополнения баланса успешно изменен на "Проблемный".' }
+          PaymentNotify.problem(@payment).deliver
+          format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+  
+      end
+    end      
+  end
+  
 end
 
     

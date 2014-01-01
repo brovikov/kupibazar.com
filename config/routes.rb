@@ -20,6 +20,7 @@ TestApp::Application.routes.draw do
   resources :items
   resources :payments do
     get :status, on: :member
+    get :status_problem, on: :member
 #    get :ordernacc, on: :collection
 #    get :orderacc, on: :collection
   end 
