@@ -167,7 +167,11 @@ def re_check                       # Отправка заказа на повт
   end
 
   def list_payments
-    @list_payments =  Payment.where( status: [0, 2] ).paginate page: params[:page_payments], order: 'created_at desc',
+    @list_payments_all =  Payment.paginate page: params[:page_payments_all], order: 'created_at desc',
+    per_page: 30
+    @list_payments_nacc =  Payment.where( status: [ 0 ] ).paginate page: params[:page_payments_nacc], order: 'created_at desc',
+    per_page: 30
+    @list_payments_problem =  Payment.where( status: [ 2 ] ).paginate page: params[:page_payments_problem], order: 'created_at desc',
     per_page: 30
     respond_to do |format|
       format.html

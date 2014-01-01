@@ -1,8 +1,34 @@
 <h1>Оплаты на согласование:</h1>
 
-  <div id="payments">
-    <%= render partial: 'list_payments', locals: { payments: @list_payments, page_param: 'page_payments' } %>
-  </div>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">На согласовании</a></li>
+    <li><a href="#pane2" data-toggle="tab">Проблемные</a></li>
+    <li><a href="#pane3" data-toggle="tab">Все платежи</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+
+      <div id="payments_nacc">
+          <%= render partial: 'list_payments', locals: { payments: @list_payments_nacc, page_param: 'page_payments_nacc' } %>
+      </div>
+    </div>
+    
+    <div id="pane2" class="tab-pane">
+       
+      <div id="payments_problem">
+          <%= render partial: 'list_payments', locals: { payments: @list_payments_problem, page_param: 'page_payments_problem' } %>
+      </div>
+   
+    </div>
+    <div id="pane3" class="tab-pane">
+      <div id="payments_all">
+          <%= render partial: 'list_payments', locals: { payments: @list_payments_all, page_param: 'page_payments_all' } %>
+      </div>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
 
 <script type="text/javascript">
   $(function() {

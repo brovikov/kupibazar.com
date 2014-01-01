@@ -1,4 +1,8 @@
-$('#payments').html('<%=escape_javascript(render(:partial => "list_payments", 
-  locals: { payments: @list_payments, page_param: 'page_payments'  }))%>');
+$('#payments_nacc').html('<%=escape_javascript(render(:partial => "list_payments", 
+  locals: { payments: @list_payments_nacc, page_param: 'page_payments_nacc'  }))%>');
+$('#payments_problem').html('<%=escape_javascript(render(:partial => "list_payments", 
+  locals: { payments: @list_payments_problem, page_param: 'page_payments_problem'  }))%>');
+$('#payments_all').html('<%=escape_javascript(render(:partial => "list_payments", 
+  locals: { payments: @list_payments_all, page_param: 'page_payments_all'  }))%>');
 
 $('.flickr_pagination a').attr('data-remote', 'true');
