@@ -77,6 +77,7 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.update_attributes(status: 1) 
         @payment.user.update_attributes(balance: @payment.user.balance + @payment.value)
+        PaymentNotify.received(@payment).deliver
         format.html { redirect_to list_payments_admin_items_url, notice: 'Статус пополнения баланса успешно обновлен.' }
           format.json { head :no_content }
       else
