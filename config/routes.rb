@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 TestApp::Application.routes.draw do
+  get "summury/totals"
+
   #get "payments/new"
 
   devise_for :users
