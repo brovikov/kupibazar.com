@@ -208,6 +208,7 @@ def re_check                       # Отправка заказа на повт
   def na_sklade # Заказ поступил на склад
     @item = Item.find(params[:id])
     @item.update_attributes( status: 8 )
+    AdminNotify.nasklade(@item).deliver
     redirect_to items_url, notice: 'Статус заказа успешно обновлен.'
   end
   
