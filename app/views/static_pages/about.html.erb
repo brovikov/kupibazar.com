@@ -1,6 +1,47 @@
 <h1>Kupibazar.com - совместные покупки</h1>
 <h2>Поздравлям всех посетителей нашего сервиса с наступившим 2014 годом!!!! <br/>
 Желаем всем счастья, здоровья и процветания!!!</h2>
-<center>
- <%= image_tag('http://static.colnyshko.ru/big/c937f9ae01b7c59f9c63ec6e72e2e9ba.gif') %>
-</center>
+<br/><br/><br/>
+<div id="myCarousel" class="carousel">
+  <!-- Картинки в карусельке -->
+  <div class="carousel-inner">
+    <div class="active item">
+      <center>
+         <%= image_tag('http://static.colnyshko.ru/big/c937f9ae01b7c59f9c63ec6e72e2e9ba.gif', size: "510x340") %>
+      </center>
+    </div>
+    <div class="item">
+    <center>
+      <img src="http://i02.i.aliimg.com/images/cms/upload/aliexpress/xuechenlu/20140101_fashion_sportline/banner/ru_510x370.jpg" alt="foo">
+    </center>
+    </div>
+    <div class="item">
+    <center> 
+      <img src="http://i03.i.aliimg.com/images/cms/upload/aliexpress/jinxufang/1220dressesppc/3c/510x370_20131225_3c_brand_ru.jpg" alt="foo">
+    </center>
+    </div>
+  </div>
+  <!-- Навигационные элементы -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<br/>
+<h2>Лента заказов:<h2> 
+<ul class="thumbnails">
+<% step = 0  %>
+  <% @item.each do |item| %>
+<% step += 1  %>
+  <li class="span3">
+
+    <a href=<%= item.link %> class="thumbnail" >
+      <%= image_tag(item.img, size: "260x180" ) %> 
+      <h3><b><%= item.value %> $</b></h3>
+      <p> <%= item.name %> <br/></p>
+    </a>
+  </li>
+  <% if step == 4 || step == 8 || step == 12 || step == 16 %>
+    <li class="span12"><center>________________________________________________________________________________________________________</center></li>
+  <% end %>
+  
+  <% end %>
+</ul>
