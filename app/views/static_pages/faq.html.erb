@@ -23,7 +23,9 @@
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
 <ul class="thumbnails">
+  <% step = 0 %>
   <% @item.each do |item| %>
+  <% step += 1 %>
   <li class="span3">
       <a href=<%= item.link %> class="thumbnail">
       <%= image_tag(item.img, size: "260x180" ) %> 
@@ -31,5 +33,8 @@
       <p> <%= item.name %> </p>
     </a>
   </li>
+  <% if step == 4  %>
+    </ul> <ul class="thumbnails"> 
+  <% end %>
 <% end %>
 </ul>
