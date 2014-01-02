@@ -25,8 +25,9 @@
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
+
 <br/>
-<h2>Лента заказов:<h2> 
+<h2>Лента заказов:</h2> 
 <ul class="thumbnails">
 <% step = 0  %>
   <% @item.each do |item| %>
@@ -39,7 +40,7 @@
       <p> <%= item.name %> <br/></p>
     </a>
   </li>
-  <% if step == 4 || step == 8 || step == 12 || step == 16 %>
+  <% if step == 4 || step == 8 || step == 12 || step == 16 || step == 20 || step == 24 %>
     <li class="span12"><center>________________________________________________________________________________________________________</center></li>
   <% end %>
   
