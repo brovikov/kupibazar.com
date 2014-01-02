@@ -25,11 +25,11 @@
 <ul class="thumbnails">
   <% @item.each do |item| %>
   <li class="span3">
-    <div class="thumbnail">
+      <a href=<%= item.link %> class="thumbnail">
       <%= image_tag(item.img, size: "260x180" ) %> 
-      <h3><b><%= @item.last.value %> $</b></h3>
-      <p> <%= item.name %> %></p>
-    </div>
+      <h3><b><%= item.value %> $</b></h3>
+      <p> <%= item.name %> </p>
+    </a>
   </li>
 <% end %>
 </ul>
