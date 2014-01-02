@@ -1,11 +1,10 @@
 # -*- encoding : utf-8 -*-
 TestApp::Application.routes.draw do
-  get "summury/totals"
 
   #get "payments/new"
 
   devise_for :users
-
+  get "summury/totals"
   get "static_pages/faq"
   get "static_pages/about"
   get "static_pages/contacts"
@@ -15,6 +14,9 @@ TestApp::Application.routes.draw do
     get :status, on: :member
   end
   resources :products
+  resources :summury do
+      get :totals, on: :member
+  end 
   resources :users
   resources :orders do
     get :pay_for, on: :member
