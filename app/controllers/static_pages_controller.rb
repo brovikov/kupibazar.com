@@ -2,7 +2,7 @@
 class StaticPagesController < ApplicationController
 
   def faq
-    @item = Item.where(  "img <> 'https://db.tt/kLZjK6hA' AND status > '1' AND status <> '9'  " ).last( 16 )
+    @item = Item.where(  "img <> 'https://db.tt/kLZjK6hA' AND status > '1'   " ).last( 16 )
 
   end
   
