@@ -24,19 +24,18 @@
 </div>
 <ul class="thumbnails">
 <% step = 0  %>
-<li class="divider"></li>
   <% @item.each do |item| %>
 <% step += 1  %>
   <li class="span3">
 
-      <a href=<%= item.link %> class="thumbnail" >
+    <a href=<%= item.link %> class="thumbnail" >
       <%= image_tag(item.img, size: "260x180" ) %> 
       <h3><b><%= item.value %> $</b></h3>
       <p> <%= item.name %> <br/></p>
     </a>
   </li>
   <% if step == 4 %>
-   <li class="divider"></li>
+  <li class="span12"></li>
   <% end %>
   <% if step == 8 %>
    <li class="divider"></li>
