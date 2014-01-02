@@ -2,10 +2,8 @@
 class StaticPagesController < ApplicationController
 
   def faq
-    @item = Item.last( 8 )
-    if @item == nil 
-      @item = Item.all
-    end
+    @item = Item.where(  "img <> 'https://db.tt/kLZjK6hA' AND status > '1' AND status <> '9'  " ).last( 16 )
+
   end
   
   def help
