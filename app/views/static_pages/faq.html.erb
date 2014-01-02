@@ -1,2 +1,35 @@
-<h1>StaticPages#faq</h1>
-<p>Find me in app/views/static_pages/faq.html.erb</p>
+<br/><br/><br/>
+<div id="myCarousel" class="carousel">
+  <!-- Картинки в карусельке -->
+  <div class="carousel-inner">
+    <div class="active item">
+      <center>
+         <%= image_tag('http://static.colnyshko.ru/big/c937f9ae01b7c59f9c63ec6e72e2e9ba.gif', size: "510x340") %>
+      </center>
+    </div>
+    <div class="item">
+    <center>
+      <img src="http://i02.i.aliimg.com/images/cms/upload/aliexpress/xuechenlu/20140101_fashion_sportline/banner/ru_510x370.jpg" alt="foo">
+    </center>
+    </div>
+    <div class="item">
+    <center> 
+      <img src="http://i03.i.aliimg.com/images/cms/upload/aliexpress/jinxufang/1220dressesppc/3c/510x370_20131225_3c_brand_ru.jpg" alt="foo">
+    </center>
+    </div>
+  </div>
+  <!-- Навигационные элементы -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<ul class="thumbnails">
+  <% @item.each do |item| %>
+  <li class="span3">
+    <div class="thumbnail">
+      <%= image_tag(item.img, size: "260x180" ) %> 
+      <h3><b><%= @item.last.value %> $</b></h3>
+      <p> <%= item.name %> %></p>
+    </div>
+  </li>
+<% end %>
+</ul>
