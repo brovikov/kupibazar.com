@@ -78,6 +78,9 @@ class LottsController < ApplicationController
     respond_to do |format|
       if @lott.update_attributes(status: 2) 
         @lott.user.update_attributes(balance: @lott.user.balance - @lott.value)
+        if @lott.user.balance < 0
+          AdminNotify.dolzhnik(@lott.user).deliver
+        end 
         format.html { redirect_to list_lotts_admin_items_url, notice: 'Статус ЛОТА успешно обновлен.' }
           format.json { head :no_content }
       else
