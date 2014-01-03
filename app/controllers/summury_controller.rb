@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SummuryController < ApplicationController
     authorize_resource :class => false
     include ApplicationHelper
