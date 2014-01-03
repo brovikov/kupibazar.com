@@ -2,6 +2,7 @@ class SummuryController < ApplicationController
     authorize_resource :class => false
     include ApplicationHelper
   def totals
+    @user_balance = User.where(" balance < '0' ")
     @user_cnt = @user_blc = @item = @item_cash = @item_lm = @item_cash_lm = @item_lm1 = @item_cash_lm1 = 0
     @lott = @lott_cash = @lott_lm = @lott_cash_lm = @lott_lm1 = @lott_cash_lm1 = 0
     User.all.each do |user|
@@ -57,4 +58,8 @@ class SummuryController < ApplicationController
       end
     end  
   end
+    def dolzhnik_notify
+      AdminNotify.dolzhnik(User.find(params[:id])).deliver
+      redirect_to totals_summury_url, notice: 'Уведомление об отрицательном балансе отправлено'
+    end 
 end

@@ -1,5 +1,12 @@
 <h1>Всего на купибазаре:</h1>
 
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">Общее</a></li>
+    <li><a href="#pane2" data-toggle="tab">Должники</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
 Всего зарегистрированно пользователей в системе: <b><%= @user_cnt %></b> <br/>
 Всего на балансе пользователей в системе: <b><%= @user_blc %> </b> <br/>
 <br/> <br/>
@@ -34,3 +41,13 @@
 ----<br/>
 <b>Итого заработано за предыдущий месяц: <%= @item_cash_lm1 + @lott_cash_lm1.round( 2 ) %> USD</b> <br/><br/>
 <br/> <br/>
+    </div>
+    <div id="pane2" class="tab-pane">
+    <% @user_balance.each do |user|  %>       
+      <%= user.nik %>:  <%= user.balance %> руб. РФ 
+      <%= link_to '', dolzhnik_notify_summury_path( user ), :class => 'icon-envelope ' %>
+      <br/><br/>     
+    <% end %>       
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->

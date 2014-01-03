@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*
 class AdminNotify < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "kupibazar@gmail.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -11,5 +11,9 @@ class AdminNotify < ActionMailer::Base
     @item = item
 
     mail to: item.order.user.email, subject: "Заказ, оформленный Вами на kupibazar.com уже на нашем складе"
+  end
+  def dolzhnik (user)
+    @user = user
+    mail to: user.email, subject: "Отрицательный баланс на kupibazar.com"
   end
 end
