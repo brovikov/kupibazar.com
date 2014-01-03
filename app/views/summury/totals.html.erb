@@ -43,11 +43,15 @@
 <br/> <br/>
     </div>
     <div id="pane2" class="tab-pane">
+    <%  total_dolg = 0 %>
     <% @user_balance.each do |user|  %>       
       <%= user.nik %>:  <%= user.balance %> руб. РФ 
       <%= link_to '', dolzhnik_notify_summury_path( user ), :class => 'icon-envelope ' %>
+      <% total_dolg += user.balance %>       
       <br/><br/>     
     <% end %>       
+      ---------<br/>
+      <b>  Общая сумма долга: <%= total_dolg %> руб. РФ       </b>
     </div>
   </div><!-- /.tab-content -->
 </div><!-- /.tabbable -->
