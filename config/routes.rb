@@ -16,6 +16,7 @@ TestApp::Application.routes.draw do
   resources :products
   resources :summury do
       get :totals, on: :member
+      get :dolzhnik_notify, on: :member
   end 
   resources :users
   resources :orders do
