@@ -2,9 +2,8 @@
 <h2>Страница пользователя <%= @user.nik %> </h2>
 Баланс: <%= @user.balance %> | Вычесленный:
 <%= @user_payments_total.round( 2 ) - @user_lotts_total.round( 2 ) - @user_orders_total.round( 2 ) %><br/>
-Всего пополнений: <%= @user_payments_total.round( 2 ) %> 
-Всего заказов: <%= @user_orders_total.round( 2 ) %> <br/>
-Всего лотов: <%= @user_lotts_total.round( 2 ) %> <br/>
+Всего пополнений: <b><%= @user_payments_total.round( 2 ) %></b>  Всего заказов: <b><%= @user_orders_total.round( 2 ) %></b>
+Всего лотов: <b><%= @user_lotts_total.round( 2 ) %></b> <br/>
 Итого потрачено: <%= @user_lotts_total.round( 2 ) + @user_orders_total.round( 2 ) %> <br/>
 <div class="tabbable">
   <ul class="nav nav-tabs">
