@@ -212,5 +212,40 @@ def re_check                       # Отправка заказа на повт
     redirect_to items_url, notice: 'Статус заказа успешно обновлен.'
   end
   
+  def user_search # Поиск пользователя
+    @user = User.usearch(params[:search])
+      respond_to do |format|
+        format.html
+        format.js
+      end
+  end
+  def user_card # Карточка пользователя
+    @user = User.find(params[:id])
+    #************************ Определение переменных для вкладок
+    @user_payments = @user.payments.paginate page: params[:payments_param], order: 'created_at desc',
+    per_page: 2
+    @user_items = @user.orders.paginate page: params[:items_param], order: 'created_at desc',
+    per_page: 2
+    @user_lotts = @user.lotts.paginate page: params[:page_param], order: 'created_at desc',
+    per_page: 2
+    #************************ 
+    
+    #************************ Подсчет итоговых значений
+    @user_payments_total = @user_orders_total = @user_lotts_total = 0
+    @user.payments.where( status: 1 ).each do |user_total| 
+      @user_payments_total += user_total.value
+    end
+    # where(['user_id = ? AND author_id <> ?', current_user.id, current_user.id])
+    @user.orders.where([ 'status <> ? AND status <> ? AND status <> ? ', 0, 1, 9 ] ).each do |order_total| 
+      @user_orders_total += order_total.order_value
+    end
+    @user.lotts.where([ 'status <> ? AND status <> ? AND status <> ? ', 0, 1, 9 ] ).each do |lotts_total| 
+      @user_lotts_total += lotts_total.value
+    end
+      respond_to do |format|
+          format.html
+          format.js
+    end
+   end
 end 
   

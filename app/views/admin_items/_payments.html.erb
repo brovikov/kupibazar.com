@@ -1,0 +1,33 @@
+<div class = flickr_pagination >
+          <%= will_paginate user_payments, param_name: page_param , container: false %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Статус</th>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% user_payments.each do |payment| %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><%= stat (payment.status)  %>    </td>
+        <td><%= l payment.data, format: :dt %></td>
+        <td><%= l payment.time, format: :tm %></td>
+        <td><span class="price"><%= number_to_currency(payment.value) %></span></td>
+        <td width = '40%'><%= payment.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = flickr_pagination >
+          <%= will_paginate user_payments, param_name: page_param , container: false %>
+</div>
+
+

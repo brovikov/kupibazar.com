@@ -1,0 +1,27 @@
+<h1>Поиск по пользователю:</h1>
+
+<%= form_tag user_search_admin_items_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-large btn-primary" %>
+  </p>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Ник</th>
+      <th>E-mail</th>
+      <th>Баланс</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @user.each do |user| %>
+        <tr>
+          <td><i class="icon-user"></i><%= link_to user.nik, user_card_admin_item_path( user ) %></td>
+          <td><%= user.email %></td>
+          <td><%= user.balance %></td> 
+        </tr>
+    <% end %>
+   </tbody>
+</table>

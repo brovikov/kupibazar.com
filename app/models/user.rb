@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   include RoleModel
   # Setup accessible (or protected) attributes for your model
@@ -50,4 +50,11 @@ class User < ActiveRecord::Base
   def set_roles
     self.roles = [:guest] if self.roles.empty?
   end
+  def self.usearch(search)
+  if search
+    find(:all, :conditions => ['nik LIKE ?' , "%#{search}%"]  )
+  else
+    find(:all, :conditions => ['nik LIKE ?' , "777dfgdg"] ) # при первом обращении ищет пользователя 777dfgdg
+  end
+end
 end

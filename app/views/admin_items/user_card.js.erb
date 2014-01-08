@@ -1,0 +1,6 @@
+$('#payments').html('<%=escape_javascript(render(:partial => "payments", locals: { user_payments: @user_payments, page_param: 'payments_param' }))%>');
+$('#items').html('<%=escape_javascript(render(:partial => "items", locals: { user_items: @user_items, page_param: 'items_param' }))%>');
+$('#lotts').html('<%=escape_javascript(render(:partial => "list_lotts", locals: { lotts: @user_lotts, page_param: 'page_param' }))%>');
+
+$('.flickr_pagination a').attr('data-remote', 'true');
+
