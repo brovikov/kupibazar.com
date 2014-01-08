@@ -1,7 +1,8 @@
 <br/>
 <h2>Страница пользователя <%= @user.nik %> </h2>
-Баланс: <%= @user.balance %><br/>
-Всего пополнений: <%= @user_payments_total.round( 2 ) %> <br/>
+Баланс: <%= @user.balance %> | Вычесленный:
+<%= @user_payments_total.round( 2 ) - @user_lotts_total.round( 2 ) - @user_orders_total.round( 2 ) %><br/>
+Всего пополнений: <%= @user_payments_total.round( 2 ) %> 
 Всего заказов: <%= @user_orders_total.round( 2 ) %> <br/>
 Всего лотов: <%= @user_lotts_total.round( 2 ) %> <br/>
 Итого потрачено: <%= @user_lotts_total.round( 2 ) + @user_orders_total.round( 2 ) %> <br/>
