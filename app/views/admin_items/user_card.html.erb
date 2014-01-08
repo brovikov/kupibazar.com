@@ -1,0 +1,42 @@
+<br/>
+<h2>Страница пользователя <%= @user.nik %> </h2>
+Баланс: <%= @user.balance %><br/>
+Всего пополнений: <%= @user_payments_total.round( 2 ) %> <br/>
+Всего заказов: <%= @user_orders_total.round( 2 ) %> <br/>
+Всего лотов: <%= @user_lotts_total.round( 2 ) %> <br/>
+Итого потрачено: <%= @user_lotts_total.round( 2 ) + @user_orders_total.round( 2 ) %> <br/>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">Пополнения</a></li>
+    <li><a href="#pane2" data-toggle="tab">Заказы</a></li>
+    <li><a href="#pane3" data-toggle="tab">Лоты</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+      <div id="payments">
+        <%= render partial: 'payments', locals: { user_payments: @user_payments, page_param: 'payments_param' } %>
+      </div>
+      
+    </div>
+    <div id="pane2" class="tab-pane">
+       
+      <div id="items">
+        <%= render partial: 'items', locals: { user_items: @user_items, page_param: 'items_param' } %>
+      </div>
+    </div>
+    <div id="pane3" class="tab-pane">
+      <div id="lotts">
+        <%= render partial: 'list_lotts', locals: { lotts: @user_lotts, page_param: 'page_param' } %>
+      </div>
+    </div>
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
+
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>
+  

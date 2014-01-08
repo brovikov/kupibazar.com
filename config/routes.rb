@@ -43,6 +43,8 @@ TestApp::Application.routes.draw do
     get :list_lotts_all, on: :collection
     get :list_items, on: :collection
     get :re_check, on: :member
+    get :user_search, on: :collection
+    get :user_card, on: :member
   end
   
   # The priority is based upon order of creation:
