@@ -223,11 +223,11 @@ def re_check                       # Отправка заказа на повт
     @user = User.find(params[:id])
     #************************ Определение переменных для вкладок
     @user_payments = @user.payments.paginate page: params[:payments_param], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
     @user_items = @user.orders.paginate page: params[:items_param], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
     @user_lotts = @user.lotts.paginate page: params[:page_param], order: 'created_at desc',
-    per_page: 2
+    per_page: 20
     #************************ 
     
     #************************ Подсчет итоговых значений
