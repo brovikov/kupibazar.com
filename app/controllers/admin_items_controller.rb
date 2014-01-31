@@ -48,7 +48,7 @@ class AdminItemsController < ApplicationController
     @item.order.update_attributes( status: 2 ) 
     order = Order.find( @item.order.id )
           order.items.each do |item|  
-          item.update_attributes( status: 2 )
+          item.update_attributes( status: 2, value_total: price( item, item.order.user )[:val] )
         end
         @item.order.user.update_attributes( balance: @item.order.user.balance - @item.order.order_value )
         redirect_to admin_items_url, notice: 'Статус заказа успешно обновлен.'
@@ -95,7 +95,7 @@ class AdminItemsController < ApplicationController
   def payd
     respond_to do |format|
       @item = Item.find(params[:id])
-      @item.update_attributes( status: 7 )
+      @item.update_attributes( status: 7, value_total: price( @item, @item.order.user )[:val] )
       @item.order.update_attributes( status: 7 )
       format.html { redirect_to list_pay_admin_items_url, notice: 'Заказ успешно выкуплен.' }
       format.json { head :no_content }       
@@ -106,25 +106,11 @@ class AdminItemsController < ApplicationController
     @item = Item.find(params[:id])
     respond_to do |format|
         if @item.status == 2
-          if @item.havy
-            prcnt = 20
-          else 
-            prcnt = 10
-          end 
-          if @item.value > 10 
-              #current_user.update_attributes( balance: (current_user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
-              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )           
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value_total) ) )           
               @item.update_attributes( status: 9, value: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
               format.json { head :no_content }       
-          else 
-              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value + 1)*35.3).round( 2 ) )
-              @item.update_attributes( status: 9, value: 0 )
-              @item.order.save  
-              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-              format.json { head :no_content }       
-          end
         else
            @item.update_attributes( status: 9, value: 0 )
            @item.order.save  
@@ -134,34 +120,15 @@ class AdminItemsController < ApplicationController
     end
   end
 
-def re_check                       # Отправка заказа на повторную проверку
+  def re_check                       # Отправка заказа на повторную проверку
     @item = Item.find(params[:id])
     respond_to do |format|
         if @item.status == 2
-          if @item.havy
-            prcnt = 20
-          else 
-            prcnt = 10
-          end 
-          if @item.value > 10 
-              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value*prcnt/100 + @item.value)*35.3).round( 2 ) )
-              @item.update_attributes( status: 0 )
-              @item.order.save  
+              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value_total) ) )
+              @item.update_attributes( status: 0, value_total: 0 )
+              @item.order.save
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
               format.json { head :no_content }       
-          else 
-              @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value + 1)*35.3).round( 2 ) )
-              @item.update_attributes( status: 0 )
-              @item.order.save  
-              format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-              format.json { head :no_content }       
-          end
-    
-        else
-           @item.update_attributes( status: 1 )
-           @item.order.save  
-           format.html { redirect_to list_confirm_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-           format.json { head :no_content }       
         end
     end
   end

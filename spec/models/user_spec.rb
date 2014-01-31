@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -18,8 +17,15 @@
 #  updated_at             :datetime         not null
 #  nik                    :string(255)
 #  balance                :decimal(6, 2)    default(0.0), not null
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#  roles_mask             :integer
+#  configApp_id           :integer
 #
 
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe User do

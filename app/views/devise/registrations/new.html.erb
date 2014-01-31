@@ -5,12 +5,15 @@
 
 <div class="row">
   <div class="span6 offset3">
+
+    <%= f.label :city, "Город"%>  
+  <%= f.collection_select :configApp_id, ConfigApp.all, :id, :city %>
+
   <%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %>
+  <%= f.email_field :email %>
     
   <%= f.label :nik, 'Ник на одноклассниках' %>
   <%= f.text_field :nik %>
-
 
   <%= f.label :password, 'Пароль' %>
   <%= f.password_field :password %>

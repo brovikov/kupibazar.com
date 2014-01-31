@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: items
@@ -20,8 +19,10 @@
 #  havy        :boolean          default(FALSE)
 #  order_no    :string(255)
 #  track       :string(255)
+#  value_total :decimal(6, 2)    default(0.0)
 #
 
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe Item do

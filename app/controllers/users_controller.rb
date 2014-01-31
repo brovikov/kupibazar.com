@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:nik]) 
+      if @user.update_attributes(params[:user]) 
         format.html { redirect_to @user, notice: 'Информация о пользователе успешно обновлена.' }
         format.json { head :no_content }
       else

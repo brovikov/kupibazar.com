@@ -42,8 +42,10 @@
               </td>
         <td>
                 <strong>$<%= item.value %></strong><br/>
-                <small><%= price( item, 'rub' )[:str] %></small> <br/>
-                <span class='total_price'><%= price( item, 'rub' )[:val] %> руб РФ</span> <br/>
+                <small><%= price( item, item.order.user )[:str] %></small> <br/>
+                <% if item.value_total > 0  %>
+                  <span class='total_price'><%= item.value_total %> <%= item.order.user.configApp.currency %></span> <br/>
+                 <% end %>
         </td>
         <td><%=item.comment%></td>
         <td>

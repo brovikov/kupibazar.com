@@ -50,8 +50,10 @@
               <td width = '35%'><%= link_to items.name, items.link %></td>
               <td>
                 <strong>$<%= items.value %></strong><br/>
-                <small><%= price(items, 'rub' )[:str] %></small> <br/>
-                <span class='total_price'><%= price(items, 'rub')[:val] %> руб РФ</span> <br/>
+                <small><%= price( items, items.order.user )[:str] %></small> <br/>
+                <% if items.value_total > 0  %>
+                <span class='total_price'><%= items.value_total %> <%= current_user.configApp.currency %></span> <br/>
+                <% end  %>
               </td>
               <td><%= order_stat(items.status)  %></td>
               <td>

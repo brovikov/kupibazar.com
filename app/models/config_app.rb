@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: config_apps
+#
+#  id         :integer          not null, primary key
+#  city       :string(255)
+#  currency   :string(255)
+#  rate       :decimal(6, 2)    not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+  # -*- encoding : utf-8 -*-
+class ConfigApp < ActiveRecord::Base
+  attr_accessible :city, :currency, :rate
+  has_many :user
+end

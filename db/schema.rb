@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116173400) do
+ActiveRecord::Schema.define(:version => 20140131170720) do
+
+  create_table "config_apps", :force => true do |t|
+    t.string   "city"
+    t.string   "currency"
+    t.decimal  "rate",       :precision => 6, :scale => 2, :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
 
   create_table "items", :force => true do |t|
     t.decimal  "value",       :precision => 6, :scale => 2,                    :null => false
@@ -30,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20131116173400) do
     t.boolean  "havy",                                      :default => false
     t.string   "order_no"
     t.string   "track"
+    t.decimal  "value_total", :precision => 6, :scale => 2, :default => 0.0
   end
 
   add_index "items", ["order_id", "created_at", "id"], :name => "index_items_on_order_id_and_created_at_and_id"
@@ -100,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20131116173400) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "roles_mask"
+    t.integer  "configApp_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

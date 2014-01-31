@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -18,8 +17,15 @@
 #  updated_at             :datetime         not null
 #  nik                    :string(255)
 #  balance                :decimal(6, 2)    default(0.0), not null
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#  roles_mask             :integer
+#  configApp_id           :integer
 #
 
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
   require 'role_model'
@@ -27,16 +33,17 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   include RoleModel
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nik, :balance
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nik, :balance, :configApp_id
   # attr_accessible :title, :body
   validates(:nik, presence: true)
   has_many :payments
   has_many :orders
   has_many :lotts
+  belongs_to :configApp
   accepts_nested_attributes_for :orders
   before_validation :set_roles
   # optionally set the integer attribute to store the roles in,

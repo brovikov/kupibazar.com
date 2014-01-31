@@ -58,6 +58,7 @@ class OrdersController < ApplicationController
   def create
     
     @order = current_user.orders.build ( params[:order] )
+    #@order.order_value = (@order.items.to_a.sum{|ttl| price(ttl)[:val]}).round( 2 )
     #@order.items.each do |img|   
     #   doc = Nokogiri::HTML(open(img.link))
     #   img.img = doc.css('meta')[7]['content']
@@ -80,7 +81,7 @@ class OrdersController < ApplicationController
       if blnc >= 0
         @order.update_attributes( status: 2 ) 
         @order.items.each do |item|  
-          item.update_attributes( status: 2 )
+          item.update_attributes( status: 2, value_total: price( item, item.order.user )[:val] )
         end
         current_user.update_attributes( balance: blnc )
         redirect_to orders_url, notice: 'Статус заказа успешно обновлен.'

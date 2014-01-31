@@ -1,0 +1,2 @@
+module ConfigAppsHelper
+end
