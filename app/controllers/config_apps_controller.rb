@@ -1,5 +1,6 @@
+# -*- encoding : utf-8 -*-
 class ConfigAppsController < ApplicationController
-  # -*- encoding : utf-8 -*-
+
     load_and_authorize_resource #cancan
   def show
     @config_app = ConfigApp.find(params[:id])
