@@ -1,0 +1,19 @@
+<%= form_for(@config_app) do |f| %>
+<%= render 'shared/error_messages',  error: @config_app  %>
+<div >
+
+    <%= f.label :city, 'Город:'%>
+    <%= f.text_field :city, class: 'input-small'  %> <br>
+
+    <%= f.label :currency, 'Валюта:'%>
+    <%= f.text_field :currency, class: 'input-small'  %> <br>
+
+    <%= f.label :rate, 'Курс:'%>
+    <%= f.text_field :rate, class: 'input-small'  %> <br>
+
+
+    <%= f.submit "Сохранить настройки" , class: "btn btn-large btn-primary" %><br>
+</div>
+
+
+<% end %>

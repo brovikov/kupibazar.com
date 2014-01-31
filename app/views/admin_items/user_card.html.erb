@@ -1,5 +1,6 @@
 <br/>
 <h2>Страница пользователя <%= @user.nik %> </h2>
+Город: <b><%= @user.configApp.city %></b>, Курс 1 доллар = <%= @user.configApp.rate %> <%= @user.configApp.currency %>  <br>
 Баланс: <%= @user.balance %> | Вычесленный:
 <%= @user_payments_total.round( 2 ) - @user_lotts_total.round( 2 ) - @user_orders_total.round( 2 ) %><br/>
 Всего пополнений: <b><%= @user_payments_total.round( 2 ) %></b> | Всего заказов: <b><%= @user_orders_total.round( 2 ) %></b>

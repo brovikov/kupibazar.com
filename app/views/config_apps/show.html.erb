@@ -1,0 +1,8 @@
+<h1> Конфигурация </h1>
+  
+ 
+  Город:<%= best_in_place @config_app, :city %>  </br>
+  Валюта:  <%= @config_app.currency %> </br>
+  Курс: <%= @config_app.rate %> </br></br></br>
+  
+<%= link_to 'Список конфигураций', config_apps_path %>

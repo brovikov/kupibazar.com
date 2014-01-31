@@ -1,0 +1,47 @@
+<h1>Конфигурация </h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Город</th>
+      <th>Валюта</th>
+      <th>Курс</th>
+      <th> Действие</th>
+    </tr>
+  </thead>
+<% @config_app.each do |config| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+
+    <td width = '20%'>
+      <%= config.id %>
+    </td>
+    
+    <td width = '20%'>
+      <%= config.city %>
+    </td>
+
+    <td width = '20%'>
+      <%= config.currency %>
+    </td>
+
+    <td width = '20%'>
+      <%= config.rate %>
+    </td>
+
+    
+    <td class="list_actions">
+      <%= link_to 'Подробнее', config %><br/>
+      <%= link_to 'Редактировать', edit_config_app_path(config) %><br/>
+      <%= link_to 'Удалить', config, method: :delete,
+                  data: { confirm: 'Вы уверены?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Новая конфигурация', new_config_app_path %>

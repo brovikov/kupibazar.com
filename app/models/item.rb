@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: items
@@ -20,11 +19,13 @@
 #  havy        :boolean          default(FALSE)
 #  order_no    :string(255)
 #  track       :string(255)
+#  value_total :decimal(6, 2)
 #
 
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   attr_accessible :title, :body, :value, :link, :seller_rate, :img, :color, :size,  :order_id, :id, :created_at, :updated_at,
-  :comment, :status, :count, :name, :havy, :order_no, :track
+  :comment, :status, :count, :name, :havy, :order_no, :track, :value_total
 #  attr_accessible :data, :time, :user_id, :value, :comment, :status
   validates :link, presence: true
   validates :name, presence: true

@@ -23,6 +23,7 @@ TestApp::Application.routes.draw do
     get :pay_for, on: :member
   end 
   resources :items
+  resources :config_apps
   resources :payments do
     get :status, on: :member
     get :status_problem, on: :member

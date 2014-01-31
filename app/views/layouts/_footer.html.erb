@@ -8,6 +8,10 @@
       <li><%= link_to "About",   '#' %></li>
       <li><%= link_to "Contacts", static_pages_contacts_path %></li>
       <li><%= link_to "Forum", 'http://forum.kupibazar.com' %></li>
+      <% if can? :manage, :admin_items %>
+        <li><%= link_to "Config App", config_apps_path %></li>
+      <% end %>
+      
     </ul>
   </nav>
   <script type="text/javascript">

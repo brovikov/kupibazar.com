@@ -52,7 +52,7 @@ class Order < ActiveRecord::Base
      end   
    end
   def total_value  
-    self.order_value = (self.items.to_a.sum{|ttl| price(ttl, "rub" )[:val]}).round( 2 )
+    self.order_value = (self.items.to_a.sum{|ttl| price( ttl, self.user )[:val]}).round( 2 )
   end 
   
 end

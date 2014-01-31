@@ -1,12 +1,9 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
-  def price (item, currency )
+  def price ( item, user )
     val_first = item.value
-    c = case
-      when currency == 'usd' then 1
-      when currency == 'rub' then 35.3
-    end  
-        value = item.value*item.count    
+    c = user.configApp.rate
+      value = item.value*item.count    
       if item.havy 
         percent = 20
         str_per = "20%"

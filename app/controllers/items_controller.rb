@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
  class ItemsController < ApplicationController
      load_and_authorize_resource #cancan
+     include ApplicationHelper
  respond_to :html, :json 
    
    def index
@@ -16,24 +17,14 @@
   
    def update
      @item = Item.find(params[:id])
-     bf = @item.value
-     if @item.havy
-       prcnt = true
-     else
-       prcnt = false
-     end 
+     bf = price( @item, @item.order.user )[:val]
      @item.update_attributes(params[:item]) 
      if @item.status == 2
-       current_user.update_attributes( balance: (current_user.balance + (bf - @item.value)*35.3*0.1 + (bf - @item.value)*35.3).round( 2 ) )
-       if prcnt != @item.havy
-         if @item.havy
-           current_user.update_attributes( balance: (current_user.balance - @item.value*35.3*0.1 ) )
-         else
-           current_user.update_attributes( balance: (current_user.balance + @item.value*35.3*0.1 ) )
-         end
-       end
-     end 
+       delta = bf - price( @item, @item.order.user )[:val]
+       @item.order.user.update_attributes( balance: (@item.order.user.balance + delta ) )
+    end 
      respond_with @item
-     @item.order.save 
+     @item.order.save
+
    end
  end 
