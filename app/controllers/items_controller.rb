@@ -20,8 +20,10 @@
      bf = price( @item, @item.order.user )[:val]
      @item.update_attributes(params[:item]) 
      if @item.status == 2
-       delta = bf - price( @item, @item.order.user )[:val]
+       b_new = price( @item, @item.order.user )[:val]
+       delta = bf - b_new
        @item.order.user.update_attributes( balance: (@item.order.user.balance + delta ) )
+       @item.update_attributes( value_total: b_new )
     end 
      respond_with @item
      @item.order.save
