@@ -24,24 +24,25 @@ class AdminItemsController < ApplicationController
       redirect_to admin_items_url
   end
   
-   def status
+   def status # Подтверждение заказа
      @item = Item.find(params[:id])
-    respond_to do |format|
-        @item.status = 1 
-        @item.save
+     respond_to do |format|
+       @item.update_attributes( status: 1 )
         Order.find(@item.order.id).items.each do |ord_it| # Циклическая проверка статуса Items
-          if ord_it.status == 1                           # Если все Items = 1 то и order.status = 1
+          if ord_it.status > 0       # Если все Items = 1 то и order.status = 1
             @item.order.status = 1
           else 
             @item.order.status = 0                         # Если нет, то  order.status = 0
             break
           end 
-          @item.order.save
         end
-      format.html { redirect_to list_confirm_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
+        order_val( @item.order ) 
+        @item.order.save
+        format.html { redirect_to list_confirm_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
         format.json { head :no_content }
       end      
   end
+
   def pay_for_override # Принудительная оплата заказа
     @item = Item.find(params[:id])
     if @item.status<2 
@@ -83,7 +84,7 @@ class AdminItemsController < ApplicationController
     end
   end
   
-   def update
+   def update #!!! Проверить!!! Метод не используется
      @item = Item.find(params[:id])
 
      @item.update_attributes(params[:item]) 
@@ -92,10 +93,10 @@ class AdminItemsController < ApplicationController
    end
     
   
-  def payd
+  def payd                      # Изменение статуса Item на "7" - выкуплен
     respond_to do |format|
       @item = Item.find(params[:id])
-      @item.update_attributes( status: 7, value_total: price( @item, @item.order.user )[:val] )
+      @item.update_attributes( status: 7 )
       @item.order.update_attributes( status: 7 )
       format.html { redirect_to list_pay_admin_items_url, notice: 'Заказ успешно выкуплен.' }
       format.json { head :no_content }       
@@ -107,12 +108,13 @@ class AdminItemsController < ApplicationController
     respond_to do |format|
         if @item.status == 2
               @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value_total) ) )           
-              @item.update_attributes( status: 9, value: 0 )
+              @item.update_attributes( status: 9, value: 0, value_total: 0 )
               @item.order.save  
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
-              format.json { head :no_content }       
+              format.json { head :no_content }
+              order_val( @item.order )
         else
-           @item.update_attributes( status: 9, value: 0 )
+           @item.update_attributes( status: 9, value: 0, value_total: 0 )
            @item.order.save  
            format.html { redirect_to list_confirm_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
            format.json { head :no_content }       
@@ -126,6 +128,7 @@ class AdminItemsController < ApplicationController
         if @item.status == 2
               @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value_total) ) )
               @item.update_attributes( status: 0, value_total: 0 )
+              order_val( @item.order )
               @item.order.save
               format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
               format.json { head :no_content }       

@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :items,  :allow_destroy => true
   before_validation :parse_img
   before_validation :parse_rate
-  before_save :total_value
+#  before_save :total_value
 
   private
   def parse_img

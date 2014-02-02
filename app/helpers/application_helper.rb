@@ -28,7 +28,7 @@ module ApplicationHelper
     {val: result.round( 2 ), str:curr_str}
   end
 
-  def order_stat (status)
+  def order_stat (status) # Статусы заказа
     case
       when status == 0 
         '<span class="label label-warning"> На согласовании </span></br>'.html_safe
@@ -45,7 +45,7 @@ module ApplicationHelper
       end     
   end
 
-  def stat (status)
+  def stat (status) # Статусы платежей
     case
       when status == 0 
         '<span class="label label-warning"> На согласовании </span></br>'.html_safe
@@ -54,6 +54,18 @@ module ApplicationHelper
       when status == 2 
       '<span class="label label-important"> Проблемный </span></br>'.html_safe
       end    
+  end
+
+  def order_val( order )
+    order_vals = 0
+    order.items.each do |item|
+      if item.status < 2
+      order_vals += price( item, item.order.user)[:val].round( 2 )
+      else
+        order_vals += item.value_total
+      end
+    end
+    order.update_attributes( order_value: order_vals )
   end
 
 end

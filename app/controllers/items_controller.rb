@@ -15,16 +15,17 @@
   end
 
   
-   def update
+   def update 
      @item = Item.find(params[:id])
      bf = price( @item, @item.order.user )[:val]
      @item.update_attributes(params[:item]) 
      if @item.status == 2
-       b_new = price( @item, @item.order.user )[:val]
-       delta = bf - b_new
-       @item.order.user.update_attributes( balance: (@item.order.user.balance + delta ) )
-       @item.update_attributes( value_total: b_new )
-    end 
+         b_new = price( @item, @item.order.user )[:val]
+         delta = bf - b_new
+         @item.order.user.update_attributes( balance: (@item.order.user.balance + delta ).round( 2 )  )
+         @item.update_attributes( value_total: b_new )
+     end 
+     order_val( @item.order ) # Обновить итоговую сумму заказа
      respond_with @item
      @item.order.save
 

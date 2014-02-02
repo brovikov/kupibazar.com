@@ -58,7 +58,6 @@ class OrdersController < ApplicationController
   def create
     
     @order = current_user.orders.build ( params[:order] )
-    #@order.order_value = (@order.items.to_a.sum{|ttl| price(ttl)[:val]}).round( 2 )
     #@order.items.each do |img|   
     #   doc = Nokogiri::HTML(open(img.link))
     #   img.img = doc.css('meta')[7]['content']
@@ -66,6 +65,7 @@ class OrdersController < ApplicationController
     #end
     respond_to do |format|
       if @order.save
+        @order.update_attributes( order_value: (@order.items.to_a.sum{|ttl| price(ttl, @order.user)[:val]}).round( 2 ) )
         format.html { redirect_to @order, notice: 'Ваш заказ успешно добавлен и ожидает подтверждения.' }
          format.json { render json: @order, status: :created, location: @payment }
       else
@@ -74,20 +74,29 @@ class OrdersController < ApplicationController
     end  
   end
 
-  def pay_for
+  def pay_for                                            # Нажатие кнопки оплатить в заказе
     @order = Order.find(params[:id])
     if @order.status <2 
-    blnc = current_user.balance - @order.order_value
-      if blnc >= 0
-        @order.update_attributes( status: 2 ) 
-        @order.items.each do |item|  
-          item.update_attributes( status: 2, value_total: price( item, item.order.user )[:val] )
-        end
-        current_user.update_attributes( balance: blnc )
-        redirect_to orders_url, notice: 'Статус заказа успешно обновлен.'
-      else 
-        redirect_to orders_url, notice: 'Недостаточно средств на Вашем балансе.' 
-      end      
+      pay_for_value = 0
+       @order.items.each do |item|
+         if item.status < 2
+           pay_for_value += price( item, item.order.user )[:val].round( 2 )
+         end 
+       end 
+         blnc = (current_user.balance - pay_for_value).round( 2 )
+       if blnc >= 0
+            @order.items.each do |item|  
+                  if item.status < 2
+                      item.update_attributes( status: 2, value_total: (price( item, item.order.user )[:val]).round( 2 ) )
+                  end
+                  
+            end
+            current_user.update_attributes( balance: blnc.round( 2 ) )
+            @order.update_attributes( status: 2 )             # Статус 2 - "ОПЛАЧЕН"
+            redirect_to orders_url, notice: "Статус заказа успешно обновлен. С вашего баланса списано #{pay_for_value} #{@order.user.configApp.currency} "
+       else 
+            redirect_to orders_url, notice: 'Недостаточно средств на Вашем балансе.' 
+       end      
     else
       redirect_to orders_url, notice: 'Оплачивать дважды??! Странновато! :) Конечно же мы против :).' 
     end 
