@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131170720) do
+ActiveRecord::Schema.define(:version => 20140215191156) do
 
   create_table "config_apps", :force => true do |t|
     t.string   "city"
@@ -42,6 +42,38 @@ ActiveRecord::Schema.define(:version => 20140131170720) do
   end
 
   add_index "items", ["order_id", "created_at", "id"], :name => "index_items_on_order_id_and_created_at_and_id"
+
+  create_table "lot_items", :force => true do |t|
+    t.decimal  "value_total", :precision => 6, :scale => 2,                :null => false
+    t.string   "item"
+    t.integer  "user_id",                                                  :null => false
+    t.integer  "lot_id",                                                   :null => false
+    t.integer  "status",                                    :default => 0, :null => false
+    t.string   "color"
+    t.string   "comment"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+  end
+
+  create_table "lots", :force => true do |t|
+    t.decimal  "value",       :precision => 6, :scale => 2,                    :null => false
+    t.string   "link",                                                         :null => false
+    t.string   "name",                                                         :null => false
+    t.string   "seller_rate",                               :default => "0",   :null => false
+    t.string   "img",                                                          :null => false
+    t.string   "color"
+    t.integer  "lotitem_id"
+    t.integer  "catalog_id"
+    t.string   "annotation"
+    t.integer  "status",                                    :default => 0,     :null => false
+    t.string   "orderno"
+    t.string   "track"
+    t.boolean  "havy",                                      :default => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+  end
+
+  add_index "lots", ["created_at", "id", "orderno", "name"], :name => "index_lots_on_created_at_and_id_and_orderno_and_name"
 
   create_table "lotts", :force => true do |t|
     t.decimal  "value",      :precision => 6, :scale => 2,                :null => false
