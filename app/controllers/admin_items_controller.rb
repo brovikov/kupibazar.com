@@ -165,10 +165,10 @@ class AdminItemsController < ApplicationController
       format.js
     end
   end
-  
+  #where([ 'status <> ? AND status <> ? AND status <> ? ', 0, 1, 9 ] )
   def list_items
-    @items =  Item.where( status: 7 ).paginate page: params[:page_items], order: 'created_at desc',
-    per_page: 60
+    @items =  Item.where( 'status = ? AND order_no IS ? ', 7, nil ).paginate page: params[:page_items], order: 'Updated_at desc',
+    per_page: 6
     respond_to do |format|
       format.html
       format.js
