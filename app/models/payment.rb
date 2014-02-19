@@ -21,5 +21,7 @@ class Payment < ActiveRecord::Base
   validates :value, presence: true
   validates_numericality_of :value, greater_than: 0, message: 'Сумма - только цифры, разделитель - точка, например: 288.80' 
   validates :comment, :length => { :maximum => 200 }
+  validates_date :data
+  validates_time :time
   belongs_to :user
 end
