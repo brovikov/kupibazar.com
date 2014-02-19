@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddEmailconfToUsers < ActiveRecord::Migration
   def change
     change_table(:users) do |t| 

@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*
+# -*- encoding : utf-8 -*-
 class AdminNotify < ActionMailer::Base
   default from: "kupibazar@gmail.com"
 
