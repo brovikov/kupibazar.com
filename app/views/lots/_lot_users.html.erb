@@ -1,0 +1,20 @@
+<span class="user_lst">
+<b>Участники лота:</b><br>
+  <% for lotitem in @lot.lotitems do %>
+      <!-- <%= order_stat( lotitem.status ) %> -->
+      <% if lotitem.user_id == 0 %>
+          <%= link_to 'Бронь', book_lot_path( l_param: lotitem.id ), :class => 'btn btn-mini ' %> 
+          <b><%= lotitem.item %></b> 
+          Свободно<br> 
+      <% else %>
+        <%= link_to 'Снять', debook_lot_path( l_param: lotitem.id ), :class => 'btn btn-mini btn-danger ' %> 
+        <b><%= lotitem.item %></b> 
+        <span class="green"><%= lotitem.user.nik %> </span><br>
+      <% end %>
+  <% end %>
+ 
+  <span class="lot_total">
+    У Вас бронь на:  <%= total_lot_price( @lot, current_user )  %> 
+    <%= current_user.configApp.currency  %>
+  </span> 
+</span>

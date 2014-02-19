@@ -9,9 +9,10 @@
 #  seller_rate :string(255)      default("0"), not null
 #  img         :string(255)      not null
 #  color       :string(255)
-#  lotitem_id  :integer
 #  catalog_id  :integer
-#  annotation  :string(255)
+#  moderator   :integer
+#  processing  :integer
+#  annotation  :text
 #  status      :integer          default(0), not null
 #  orderno     :string(255)
 #  track       :string(255)

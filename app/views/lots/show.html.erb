@@ -1,0 +1,58 @@
+  <div class="row">
+  <div class="span3">
+    <br><h2> ЛОТ № <%= @lot.id %> </h2>
+    <%= link_to image_tag(@lot.img, size: "250x250", class: "img-polaroid"), @lot.link, target: '_blank'  %><br>
+    Цвет: <b><%= @lot.color %></b>
+    <div Style='line-height:10pt'>
+      <small><br>
+          <i class="icon-info-sign"></i> Цвет или оттенок изделия на фотографии может отличаться от реального. 
+          Характеристики и комплектация товара могут изменятся производителем без уведомления. 
+          Kupibazar.com не несет ответственности за изменения внесенные производителем.
+      </small>
+    </div>  
+    <br><i class="icon-signal"></i><b> Рейтинг продавца: <%= image_tag( @lot.seller_rate ) %> </b><br>
+    <b><i class="icon-user"></i> Модератор лота: <%=  find_user( @lot.moderator ) %> </b><br><br>
+      
+    <br>
+        <%= render 'social' %> <!-- Share Button -->
+
+    </div>  
+  <div class="span9">  
+  <br><h2><%= @lot.name %> </h2>
+    <div class="row">
+      <div class="span4">
+        <span class="price">
+          <%= lot_price( @lot, current_user ) %> <span class="price_cur"><%= current_user.configApp.currency  %></span><br>
+        </span>
+        <span class="price_usd">
+          <%= @lot.value %> $<br>
+        </span>
+          <% if @lot.moderator == current_user.id %>
+            <small><i class="icon-info-sign"></i> Для Вас, как для модератора этого лота, <br>
+              указана цена с учетом скидки 50% на коммиссию</small><br> 
+        <% end %>
+        <br>
+         <i class="icon-time"></i>
+          Время обработки заказа <br>продавцом (дней): <b><%= @lot.processing %></b> 
+        <br>
+        <br><%= order_stat( @lot.status ) %>
+        <br><%= @lot.annotation %>
+      </div>
+      <div class="span5">
+        <%= render 'lot_users' %>
+      </div>
+    </div>
+
+  <% if @lot.status < 1 %>
+
+
+  <% end %>
+  </div>
+  </div>
+  <br><br><br>
+  <p>
+    <%= link_to "Изменить", edit_lot_path(@lot) %> |
+    <%= link_to "Удалить", @lot, :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "Просмотреть все заказы", @lot %>
+  </p>
+

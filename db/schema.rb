@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215191156) do
+ActiveRecord::Schema.define(:version => 20140215234645) do
 
   create_table "config_apps", :force => true do |t|
     t.string   "city"
@@ -43,16 +43,16 @@ ActiveRecord::Schema.define(:version => 20140215191156) do
 
   add_index "items", ["order_id", "created_at", "id"], :name => "index_items_on_order_id_and_created_at_and_id"
 
-  create_table "lot_items", :force => true do |t|
-    t.decimal  "value_total", :precision => 6, :scale => 2,                :null => false
+  create_table "lotitems", :force => true do |t|
+    t.decimal  "value_total", :precision => 6, :scale => 2, :default => 0.0, :null => false
     t.string   "item"
-    t.integer  "user_id",                                                  :null => false
-    t.integer  "lot_id",                                                   :null => false
-    t.integer  "status",                                    :default => 0, :null => false
+    t.integer  "user_id",                                   :default => 0
+    t.integer  "lot_id"
+    t.integer  "status",                                    :default => 0,   :null => false
     t.string   "color"
     t.string   "comment"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
   end
 
   create_table "lots", :force => true do |t|
@@ -62,9 +62,10 @@ ActiveRecord::Schema.define(:version => 20140215191156) do
     t.string   "seller_rate",                               :default => "0",   :null => false
     t.string   "img",                                                          :null => false
     t.string   "color"
-    t.integer  "lotitem_id"
     t.integer  "catalog_id"
-    t.string   "annotation"
+    t.integer  "moderator"
+    t.integer  "processing"
+    t.text     "annotation"
     t.integer  "status",                                    :default => 0,     :null => false
     t.string   "orderno"
     t.string   "track"

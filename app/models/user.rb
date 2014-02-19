@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -25,7 +26,7 @@
 #  configApp_id           :integer
 #
 
-# -*- encoding : utf-8 -*-
+
 class User < ActiveRecord::Base
 
   require 'role_model'
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   include RoleModel
   # Setup accessible (or protected) attributes for your model
@@ -42,6 +43,7 @@ class User < ActiveRecord::Base
   validates(:nik, presence: true)
   has_many :payments
   has_many :orders
+  has_many :lotitems
   has_many :lotts
   belongs_to :configApp
   accepts_nested_attributes_for :orders

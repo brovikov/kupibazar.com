@@ -47,6 +47,10 @@ TestApp::Application.routes.draw do
     get :user_search, on: :collection
     get :user_card, on: :member
   end
+  resources :lots do
+    get :book, on: :member  
+    get :debook, on: :member 
+  end 
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

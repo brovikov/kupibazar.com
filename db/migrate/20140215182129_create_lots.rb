@@ -7,9 +7,10 @@ class CreateLots < ActiveRecord::Migration
       t.string :seller_rate, default: 0, null: false
       t.string :img, null: false
       t.string :color
-      t.integer :lotitem_id
       t.integer :catalog_id
-      t.string :annotation
+      t.integer :moderator
+      t.integer :processing
+      t.text :annotation
       t.integer :status, default: 0, null: false
       t.string :orderno
       t.string :track

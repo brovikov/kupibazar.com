@@ -31,18 +31,23 @@ module ApplicationHelper
   def order_stat (status) # Статусы заказа
     case
       when status == 0 
-        '<span class="label label-warning"> На согласовании </span></br>'.html_safe
+        '<span class="label label-warning"> На согласовании </span>'.html_safe
       when status == 1 
-        '<span class="label label-success"> Подтвержден </span></br>'.html_safe
+        '<span class="label label-success"> Подтвержден </span>'.html_safe
       when status == 2 
-        '<span class="label label-success"> Оплачен </span></br>'.html_safe
+        '<span class="label label-success"> Оплачен </span>'.html_safe
       when status == 9 
-        '<span class="label label-important"> Отклонен </span></br>'.html_safe
+        '<span class="label label-important"> Отклонен </span>'.html_safe
       when status == 7 
-        '<span class="label label-success"> Выкуплен </span></br>'.html_safe
+        '<span class="label label-success"> Выкуплен </span>'.html_safe
       when status == 8 
-        '<span class="label label-success"> На складе </span></br>'.html_safe
-      end     
+        '<span class="label label-success"> На складе </span>'.html_safe
+      when status == 3 
+        '<span class="label label-success"> Бронь </span>'.html_safe
+      when status == 5 
+        '<span class="label label-success"> Выдан </span>'.html_safe
+      end    
+
   end
 
   def stat (status) # Статусы платежей
@@ -67,5 +72,7 @@ module ApplicationHelper
     end
     order.update_attributes( order_value: order_vals )
   end
+
+
 
 end

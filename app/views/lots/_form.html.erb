@@ -1,0 +1,52 @@
+  <div class="row">
+  <div class="span6">
+  <%= nested_form_for(@lot) do |f| %>
+      <%= render 'shared/error_messages',  error: @lot  %>
+
+          <%= f.label :name, 'Наименование лота:'%>
+          <%= f.text_field :name %>
+      
+          <%= f.label :value, 'Стоимость позиции лота, в USD:'%>
+          <%= f.text_field :value %>
+      
+          <%= f.label :color, 'Цвет:'%>
+          <%= f.text_field :color %>
+        
+          <%= f.label :havy, 'Объемный?', :value => "false"%>
+          <%= f.radio_button :havy, false, :checked => true %> Нет
+          <%= f.radio_button :havy, true  %> Да <br><br>
+        
+          <%= f.label :link, 'Ссылка на страницу лота:'%>
+          <%= f.text_field :link %>
+         
+          <%= f.label :img, 'Ссылка на картинку:'%>
+          <%= f.text_field :img %>    
+        
+          <%= f.label :seller_rate, 'Ссылка на рейтинг продавца:'%>
+          <%= f.text_field :seller_rate %>
+
+          <%= f.label :processing, 'Время обработки заказа продавцом, дней:'%>
+          <%= f.text_field :processing %>
+          
+          <%= f.label :annotation, 'Коментарий:'%>
+          <%= f.text_area :annotation, placeholder: "В случае необходимости укажите Ваш коментарий (не обязательно)...",
+            rows: "5" %>
+    
+          <%= f.fields_for :lotitems do |lotItems_form| %>
+              <div class="row">
+              <div class="span3">
+              <%= render partial: 'lot_items_fields', :locals => { :f => lotItems_form } %>
+              <%= lotItems_form.link_to_remove "Удалить эту позицию" %>
+             </div>
+             </div>         
+          <% end %>
+          <%= f.link_to_add "Добавить еще одну позицию", :lotitems %>
+          
+             <br>
+             <%= f.submit "Оформить заказ" , class: "btn btn-large btn-primary" %>
+  <% end %>       
+  </div> 
+
+  </div>
+
+  
