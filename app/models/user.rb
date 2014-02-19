@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -23,8 +24,6 @@
 #  unconfirmed_email      :string(255)
 #  roles_mask             :integer
 #  configApp_id           :integer
-#
-
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
@@ -33,7 +32,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   include RoleModel
   # Setup accessible (or protected) attributes for your model

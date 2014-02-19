@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: config_apps
@@ -10,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-  # -*- encoding : utf-8 -*-
+
 class ConfigApp < ActiveRecord::Base
   attr_accessible :city, :currency, :rate
   has_many :user
