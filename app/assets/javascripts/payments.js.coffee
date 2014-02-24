@@ -3,3 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $('.datepicker').datepicker()
 $('.time_picker').timepicker()
+

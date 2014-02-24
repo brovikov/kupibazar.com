@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.purr 
+//= require jquery.ui.all
+//= require jquery.modal
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require jquery_nested_form

@@ -3,13 +3,30 @@
   <% for lotitem in @lot.lotitems do %>
       <!-- <%= order_stat( lotitem.status ) %> -->
       <% if lotitem.user_id == 0 %>
-          <%= link_to 'Бронь', book_lot_path( l_param: lotitem.id ), :class => 'btn btn-mini ' %> 
+  <span class="btn btn-mini" data-toggle="modal" data-target="#myModal"> Бронь </span>
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Забронировать <%= lotitem.item %> </h4>
+        <%= lotitem.lot.name %>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'dialog', locals: { lotitempartial: lotitem } %>
+      </div>
+    </div>
+  </div>
+</div>
+  
           <b><%= lotitem.item %></b> 
           Свободно<br> 
       <% else %>
         <%= link_to 'Снять', debook_lot_path( l_param: lotitem.id ), :class => 'btn btn-mini btn-danger ' %> 
         <b><%= lotitem.item %></b> 
-        <span class="green"><%= lotitem.user.nik %> </span><br>
+        <span class="green"><%= lotitem.user.nik %>  <%= lotitem.color %>  <%= lotitem.comment %></span><br>
       <% end %>
   <% end %>
  
@@ -18,3 +35,6 @@
     <%= current_user.configApp.currency  %>
   </span> 
 </span>
+
+
+

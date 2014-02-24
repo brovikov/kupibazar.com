@@ -8,7 +8,6 @@ gem 'nested_form', :git => 'https://github.com/ryanb/nested_form.git'
 gem 'best_in_place'
 gem 'magic_encoding'
 
-
     
 gem 'bcrypt-ruby', '3.0.1'
 gem 'devise'
@@ -46,15 +45,14 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-
+  gem 'jquery-modal-rails' # ???? УДалить - не используется
+  gem 'jquery-ui-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :production do
   gem 'mysql2'
 end
-
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

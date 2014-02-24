@@ -18,18 +18,25 @@ class LotsController < ApplicationController
   
   def show
     @lot = Lot.find(params[:id])
+    
+      respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @lot }
+    end
   end
   
   def book
     @lotitem = Lotitem.find(params[:l_param])
-    @lotitem.update_attributes( user_id: current_user.id ) 
+    t=params[:lotitem]
+    @lotitem.update_attributes( user_id: current_user.id, color: t["color"], comment: t["comment"] )
+    #render action: "add_book", remote: true
     redirect_to @lotitem.lot, notice: 'Для окончания бронирования заполните пожалуйста дополнительные данные.' 
   end 
   
   def debook
     @lotitem = Lotitem.find(params[:l_param])
-    @lotitem.update_attributes( user_id: 0 ) 
+    @lotitem.update_attributes( user_id: 0, color: nil, comment: nil ) 
     redirect_to @lotitem.lot, notice: 'Бронирование аннулированно.' 
   end 
-
+  
 end

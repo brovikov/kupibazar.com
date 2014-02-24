@@ -1,0 +1,13 @@
+<p>
+  <%= form_for(lotitempartial, url: {:action => 'book', :controller => 'lots'}, method: :get) do |f| %>
+      
+          <%= hidden_field_tag(:l_param, lotitempartial.id) %>
+          <%= f.label :color, 'Цвет'%>
+          <%= f.text_field :color, placeholder: "Вносить при необходимости..." %>
+      
+          <%= f.label :comment, 'Комментарий'%>
+          <%= f.text_field :comment, placeholder: "Коментарий при необходимости..." %>
+<br>      
+          <%= f.submit "Забронировать" , class: "btn btn-large btn-primary" %>          
+<% end %>
+</p>

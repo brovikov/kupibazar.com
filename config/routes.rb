@@ -49,7 +49,8 @@ TestApp::Application.routes.draw do
   end
   resources :lots do
     get :book, on: :member  
-    get :debook, on: :member 
+    get :debook, on: :member
+    get :add_book, on: :member 
   end 
   
   # The priority is based upon order of creation:
