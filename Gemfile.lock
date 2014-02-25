@@ -84,6 +84,7 @@ GEM
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
     ffi (1.9.0)
+    forum_monster (1.0.4)
     highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.1)
@@ -133,6 +134,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails_autolink (1.1.5)
+      rails (> 3.1)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -207,6 +210,7 @@ DEPENDENCIES
   devise
   devise-russian (~> 2.0.1.1)
   factory_girl_rails (= 4.1.0)
+  forum_monster
   i18n
   jquery-modal-rails
   jquery-rails
@@ -215,6 +219,7 @@ DEPENDENCIES
   mysql2
   nested_form!
   rails (= 3.2.13)
+  rails_autolink (~> 1.1.5)
   role_model
   rspec-rails (= 2.11.0)
   sass-rails (~> 3.2.3)

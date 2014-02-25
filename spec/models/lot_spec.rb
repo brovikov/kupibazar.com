@@ -10,6 +10,7 @@
 #  img         :string(255)      not null
 #  color       :string(255)
 #  catalog_id  :integer
+#  topic_id    :integer
 #  moderator   :integer
 #  processing  :integer
 #  annotation  :text

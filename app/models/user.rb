@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -24,8 +23,11 @@
 #  unconfirmed_email      :string(255)
 #  roles_mask             :integer
 #  configApp_id           :integer
+#  topics_count           :integer          default(0)
+#  posts_count            :integer          default(0)
 #
 
+# -*- encoding : utf-8 -*-
 
 class User < ActiveRecord::Base
 
@@ -45,6 +47,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :lotitems
   has_many :lotts
+  has_many :topics, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
   belongs_to :configApp
   accepts_nested_attributes_for :orders
   before_validation :set_roles

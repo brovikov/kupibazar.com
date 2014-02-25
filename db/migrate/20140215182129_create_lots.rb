@@ -8,6 +8,7 @@ class CreateLots < ActiveRecord::Migration
       t.string :img, null: false
       t.string :color
       t.integer :catalog_id
+      t.integer :topic_id
       t.integer :moderator
       t.integer :processing
       t.text :annotation

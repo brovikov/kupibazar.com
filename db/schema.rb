@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215234645) do
+ActiveRecord::Schema.define(:version => 20140224221850) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.boolean  "state",      :default => true
+    t.integer  "position",   :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "config_apps", :force => true do |t|
     t.string   "city"
@@ -19,6 +27,18 @@ ActiveRecord::Schema.define(:version => 20140215234645) do
     t.decimal  "rate",       :precision => 6, :scale => 2, :null => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "forums", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "state",        :default => true
+    t.integer  "topics_count", :default => 0
+    t.integer  "posts_count",  :default => 0
+    t.integer  "position",     :default => 0
+    t.integer  "category_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -63,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20140215234645) do
     t.string   "img",                                                          :null => false
     t.string   "color"
     t.integer  "catalog_id"
+    t.integer  "topic_id"
     t.integer  "moderator"
     t.integer  "processing"
     t.text     "annotation"
@@ -113,6 +134,15 @@ ActiveRecord::Schema.define(:version => 20140215234645) do
 
   add_index "payments", ["user_id", "created_at"], :name => "index_payments_on_user_id_and_created_at"
 
+  create_table "posts", :force => true do |t|
+    t.text     "body"
+    t.integer  "forum_id"
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "products", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -120,6 +150,18 @@ ActiveRecord::Schema.define(:version => 20140215234645) do
     t.decimal  "price",       :precision => 8, :scale => 2
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "topics", :force => true do |t|
+    t.string   "title"
+    t.integer  "hits",        :default => 0
+    t.boolean  "sticky",      :default => false
+    t.boolean  "locked",      :default => false
+    t.integer  "posts_count"
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -143,6 +185,8 @@ ActiveRecord::Schema.define(:version => 20140215234645) do
     t.string   "unconfirmed_email"
     t.integer  "roles_mask"
     t.integer  "configApp_id"
+    t.integer  "topics_count",                                         :default => 0
+    t.integer  "posts_count",                                          :default => 0
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

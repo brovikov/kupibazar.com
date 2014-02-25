@@ -9,7 +9,14 @@ class LotsController < ApplicationController
     
     @lot = Lot.new( params[:lot] )
     @lot.moderator = current_user.id
-      if @lot.save
+    
+    @forum = Forum.find( 1 )  # Создаем новый топик на форуме id=1
+    @topic = @forum.topics.build( title: @lot.name , body: 'Автоматически созданный топик'  )
+    @topic.user = current_user
+    @topic.save
+    @lot.topic_id = @topic.id
+    
+    if @lot.save
          redirect_to @lot, notice: 'Ваш лот успешно добавлен и ожидает подтверждения.' 
       else
          render action: "new" 

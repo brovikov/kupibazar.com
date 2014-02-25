@@ -55,3 +55,42 @@
     <%= link_to "Удалить", @lot, :confirm => 'Are you sure?', :method => :delete %> |
     <%= link_to "Просмотреть все заказы", @lot %>
   </p>
+
+
+<% @topic = Topic.find( @lot.topic_id ) %>
+<div class="module">
+  <div class="module_header">
+    <%= @topic.title %>
+  </div>
+  <div>
+    <table>
+      <% @topic.posts.each do |post| %>
+      <tr>
+        <td class="post_author" rowspan="2">
+          <span class="name"><%= post.user.nik %></span>
+          <span class="avatar"><!-- This space reserved for Avatar --></span>
+          <span class="info smaller">
+            Постов: <%= post.user.posts.size %><br />
+            Зарегистрирован(а): <%= post.user.created_at.to_s(:joined) %><br />
+          </span>
+        </td>
+        <td class="post_header">
+          <span class="left post_date smaller"><small>Написано <%= post.created_at %></small></span>
+          <span class="right controls">
+            <%= link_to "Написать", new_topic_post_path(@topic) %>
+            <%= link_to "Цитировать", new_topic_post_path(@topic, :quote => post) %>
+            <%= link_to "Редактировать", edit_post_path(post) %>
+            <%= link_to "Удалить", post, :confirm => "Are you sure?", :method => :delete %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td class="post_body">
+          <%= simple_format(auto_link(post.body)) %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<span id="end"></span>

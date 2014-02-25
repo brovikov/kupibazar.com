@@ -7,6 +7,8 @@ gem "jquery-rails"
 gem 'nested_form', :git => 'https://github.com/ryanb/nested_form.git'
 gem 'best_in_place'
 gem 'magic_encoding'
+gem 'forum_monster'
+gem "rails_autolink", "~> 1.1.5"
 
     
 gem 'bcrypt-ruby', '3.0.1'

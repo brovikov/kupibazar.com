@@ -10,6 +10,7 @@
 #  img         :string(255)      not null
 #  color       :string(255)
 #  catalog_id  :integer
+#  topic_id    :integer
 #  moderator   :integer
 #  processing  :integer
 #  annotation  :text
@@ -24,8 +25,9 @@
 # -*- encoding : utf-8 -*-
 class Lot < ActiveRecord::Base
   attr_accessible :value, :link, :name, :seller_rate, :img, :color, :annotation, :status, 
-  :orderno, :track, :havy, :lotitems_attributes, :processing, :moderator
+  :orderno, :track, :havy, :lotitems_attributes, :processing, :moderator, :topic_id
   has_many :lotitems, :dependent => :destroy
+  has_one :topic, :dependent => :destroy
   accepts_nested_attributes_for :lotitems,  :allow_destroy => true
   validates :link, presence: true
   validates :name, presence: true

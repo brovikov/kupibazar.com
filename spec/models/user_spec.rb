@@ -23,6 +23,8 @@
 #  unconfirmed_email      :string(255)
 #  roles_mask             :integer
 #  configApp_id           :integer
+#  topics_count           :integer          default(0)
+#  posts_count            :integer          default(0)
 #
 
 # -*- encoding : utf-8 -*-
