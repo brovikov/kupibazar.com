@@ -35,15 +35,35 @@ class LotsController < ApplicationController
   def book
     @lotitem = Lotitem.find(params[:l_param])
     t=params[:lotitem]
-    @lotitem.update_attributes( user_id: current_user.id, color: t["color"], comment: t["comment"] )
-    #render action: "add_book", remote: true
-    redirect_to @lotitem.lot, notice: 'Для окончания бронирования заполните пожалуйста дополнительные данные.' 
+    sts = 1
+    @lotitem.update_attributes( user_id: current_user.id, color: t[:color], comment: t[:comment], status: 3 )
+    @lotitem.lot.lotitems.each  do |item| 
+      if item.status == 3 
+        sts = 3
+      else
+        sts = 1
+        break
+      end
+    end
+    @lotitem.lot.update_attributes( status: sts )   
+    redirect_to @lotitem.lot, notice: 'Бронирование выполненно успешно!' 
   end 
   
   def debook
+    sts = 1
     @lotitem = Lotitem.find(params[:l_param])
-    @lotitem.update_attributes( user_id: 0, color: nil, comment: nil ) 
+    @lotitem.update_attributes( user_id: 0, color: nil, comment: nil, status: 1 ) 
+       @lotitem.lot.lotitems.each  do |item| 
+      if item.status == 3 
+        sts = 3
+      else
+        sts = 1
+        break
+      end
+    end
+    @lotitem.lot.update_attributes( status: sts ) 
     redirect_to @lotitem.lot, notice: 'Бронирование аннулированно.' 
   end 
+  
   
 end

@@ -21,7 +21,7 @@
   <br><h2><%= @lot.name %> </h2>
     <div class="row">
       <div class="span4">
-        <span class="price">
+        <span class="price_local">
           <%= lot_price( @lot, current_user ) %> <span class="price_cur"><%= current_user.configApp.currency  %></span><br>
         </span>
         <span class="price_usd">
@@ -38,9 +38,11 @@
         <br><%= order_stat( @lot.status ) %>
         <br><%= @lot.annotation %>
       </div>
+      <% if @lot.status > 0 %>
       <div class="span5">
         <%= render 'lot_users' %>
       </div>
+      <% end %>
     </div>
 
   <% if @lot.status < 1 %>
@@ -56,17 +58,17 @@
     <%= link_to "Просмотреть все заказы", @lot %>
   </p>
 
-
+<!-- ---------------- FORUM ----------------------------- -->
 <% @topic = Topic.find( @lot.topic_id ) %>
 <div class="module">
   <div class="module_header">
     <%= @topic.title %>
   </div>
   <div>
-    <table>
+    <table class="tablef">
       <% @topic.posts.each do |post| %>
       <tr>
-        <td class="post_author" rowspan="2">
+        <td class="post_author" class="tablef" rowspan="2">
           <span class="name"><%= post.user.nik %></span>
           <span class="avatar"><!-- This space reserved for Avatar --></span>
           <span class="info smaller">
@@ -74,7 +76,7 @@
             Зарегистрирован(а): <%= post.user.created_at.to_s(:joined) %><br />
           </span>
         </td>
-        <td class="post_header">
+        <td class="post_header" class="tablef">
           <span class="left post_date smaller"><small>Написано <%= post.created_at %></small></span>
           <span class="right controls">
             <%= link_to "Написать", new_topic_post_path(@topic) %>
@@ -84,8 +86,8 @@
           </span>
         </td>
       </tr>
-      <tr>
-        <td class="post_body">
+      <tr class="tablef">
+        <td class="tablef" class="post_body">
           <%= simple_format(auto_link(post.body)) %>
         </td>
       </tr>

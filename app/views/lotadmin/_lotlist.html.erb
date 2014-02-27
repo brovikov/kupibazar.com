@@ -1,0 +1,60 @@
+<div class = flickr_pagination >
+          <%= will_paginate lots, param_name: page_param, container: false %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Фото</th>
+      <th>Сумма</th>
+      <th>Название и Комментарий </th>
+      <th>Позиции</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% lots.each do |lot| %>
+        <tr>
+        <td><%= link_to lot.id, lot_path(lot) %></td>
+         <td>
+                <%= l lot.created_at, format: :short %><br/>
+                <a class="pull-left" href="#">
+                  <%= link_to image_tag(lot.img, size: "50x50"), lot.link  %>
+                </a>
+               <div style="width:100px;">
+                 <small>
+                   Цвет: <%= lot.color %> 
+                   <%= image_tag(lot.seller_rate, size: "50x50") %> 
+                 </small>
+                   <br><%= best_in_place lot, :havy, :type => :checkbox, 
+                    :collection => ["Без доплаты за вес", "С доплатой за вес!"] %>
+               </div>
+               </td> 
+     <td>
+          <h3><strong>$<%= best_in_place lot, :value %></strong></h3><br/>
+        </td>
+        <td>
+          <%= best_in_place lot, :name %><br>
+          <%= best_in_place lot, :annotation %>
+        </td>
+        <td>
+          <% lot.lotitems.each do |item| %>
+          <%= item.item %> 
+          <% if item.user %>
+            <%= item.user.nik %> <br>
+          <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if lot.status < 1 %>
+             <%= link_to 'Принять', confirmed_lotadmin_path(lot), :class => 'btn btn-mini btn-success' %>
+          <% end %> 
+        </td>
+   </tbody>
+</table>
+        <iframe src = "<%= lot.link %>", height="2000px;", width="110%", align='center'>
+          Произошла ошибка отображения страницы товара
+        </iframe> 
+
+<% end %>

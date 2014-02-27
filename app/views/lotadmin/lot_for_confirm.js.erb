@@ -1,0 +1,4 @@
+$('#lots').html('<%=escape_javascript(render(:partial => "lotlist", 
+  locals: { lots: @lot, page_param: 'page_lots'  }))%>');
+
+$('.flickr_pagination a').attr('data-remote', 'true');

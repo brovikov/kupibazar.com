@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @catalog.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @catalog.description %>
+</p>
+
+<p>
+  <b>Img:</b>
+  <%= @catalog.img %>
+</p>
+<% @catalog.catalogitems.each do |item| %>
+<b>Line:</b>
+<%= item.line %> <br>
+<b>Description:</b>
+<%= item.description %> <br>
+<b>Img:</b>
+<%= item.img %> <br>
+<% end %>
+<br> <br>
+<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
+<%= link_to 'Back', catalogs_path %>

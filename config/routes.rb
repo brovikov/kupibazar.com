@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 TestApp::Application.routes.draw do
 
+  resources :catalogs
+
+
   resources :categories, :except => [:index, :show]
   resources :forums, :except => :index do
     resources :topics, :shallow => true, :except => :index do
@@ -8,6 +11,10 @@ TestApp::Application.routes.draw do
     end
     root :to => 'categories#index', :via => :get
   end
+  resources :lotadmin do
+    get :lot_for_confirm, on: :collection
+    get :confirmed, on: :member
+  end 
 
   #get "payments/new"
 
@@ -58,7 +65,6 @@ TestApp::Application.routes.draw do
   resources :lots do
     get :book, on: :member  
     get :debook, on: :member
-    get :add_book, on: :member 
   end 
   
   # The priority is based upon order of creation:

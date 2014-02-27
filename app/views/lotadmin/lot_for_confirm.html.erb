@@ -1,0 +1,11 @@
+<h1> Сборные лоты на согласование </h1>
+
+  <div id="lots">
+    <%= render partial: 'lotlist', locals: { lots: @lot, page_param: 'page_lots' } %>
+  </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.flickr_pagination a').attr('data-remote', 'true');
+  });
+</script>
