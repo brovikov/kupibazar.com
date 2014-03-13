@@ -6,7 +6,7 @@
 <div class="row">
   <div class="span6 offset3">
 
-    <%= f.label :city, "Город"%>  
+  <%= f.label :city, "Город"%>  
   <%= f.collection_select :configApp_id, ConfigApp.all, :id, :city %>
 
   <%= f.label :email %>

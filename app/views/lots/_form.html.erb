@@ -5,7 +5,12 @@
 
           <%= f.label :name, 'Наименование лота:'%>
           <%= f.text_field :name %>
-      
+    
+          <%= f.label :catalog_id, "Выберите каталог"%>  
+          <%= f.grouped_collection_select :catalog_id,
+          Catalog.all, :catalogitems, :title, :id, :line, { :prompt => 'Выберите раздел каталога ...' }
+          %>
+              
           <%= f.label :value, 'Стоимость позиции лота, в USD:'%>
           <%= f.text_field :value %>
       
@@ -43,7 +48,7 @@
           <%= f.link_to_add "Добавить еще одну позицию", :lotitems %>
           
              <br>
-             <%= f.submit "Оформить заказ" , class: "btn btn-large btn-primary" %>
+             <%= f.submit "Оформить лот" , class: "btn btn-large btn-primary" %>
   <% end %>       
   </div> 
 

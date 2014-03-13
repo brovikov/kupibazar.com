@@ -81,4 +81,18 @@ class CatalogsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def show_catalog 
+    a = Catalogitem.find(params[:id])
+    @path = a.line
+    @path_cat = a.catalog.title
+    @lot = Lot.where([ 'catalog_id = ? AND status <> ?', params[:id], 0 ])
+  end 
+  def show_catalog_first 
+    @lot=[]
+    Catalogitem.find(params[:id]).catalog.catalogitems.each do |z|
+      @lot += Lot.where([ 'catalog_id = ? AND status <> ?', z.id, 0 ])
+    end
+    @path = Catalogitem.find(params[:id]).catalog.title
+
+  end 
 end

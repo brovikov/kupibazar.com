@@ -10,41 +10,53 @@
                 <i class="icon-list icon-white"></i> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
+                <li><span class="pddl">Выберите категорию:<span></li>
+                <li class="divider"></li>
                 <% @cat = Catalog.all %>
                 <% @cat.each do |cat|%>
-                <li><a href="#" id="example1" rel="popover" data-original-title="Детская одежда" data-trigger="manual">
-                  Детская Одежда<br>
-                  <small>Верхняя, нижняя</small>
+                <li><a class="ablc" href='<%= show_catalog_first_catalogs_path( id: cat.id ) %>' id="example1" rel="<%= cat.id %>" data-original-title='<%= cat.title %>' data-trigger="manual">
+                  <%= cat.title %><br>
+                  <small class="agrey"><%= cat.description %></small>
                 </a></li>  
-                <div class="popover" onmouseover="$(this).mouseleave(function() {$(this).hide();});"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+                <div id='<%= cat.id %>' style="display: none">
+                
+                 <% cat.catalogitems.each do |catitem| %>
+                  <div class="agrey">
+                    <%=link_to catitem.line, show_catalog_catalogs_path( id: catitem.id ) %><br>
+                    <small><%= catitem.description %></small><br>
+                  </div>
+                  <% end %>
+                 
+                  
+                </div>
                 <script>
-                        $(function(){
-                          var timeoutObj;
-                          // pop up #example1, #example2, #example3 with same content
-                        $("a[rel=popover]")
-                                  .popover({
-                                        offset: 10,
-                                        trigger: 'manual',
-                                        html: true,
-                                        placement: 'right',
-                                        
-                                        }).mouseenter(function(e) {
-                                        $(this).popover('show');
-                                        }).mouseleave(function(e) {
-                                        var _this = this;
-                                        setTimeout(function() {
-                                        if (!$(".popover:hover").length) {
-                                          $(_this).popover("hide");
-                                         }
-                                        }, 100);
-                                    });    
-                      
-                          
-                        });
+                      $(function(){
+                      var timeoutObj;
+                      $("a[rel=<%= cat.id %>]")
+                      .popover({
+                      offset: 10,
+                      trigger: 'manual',
+                      html: true,
+                      placement: 'right',
+                      template: '<div class="popover" onmouseover="$(this).mouseleave(function() {$(this).hide();});"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+                      content: function() {
+                      return $('#<%= cat.id %>').html();
+                      }
+                      }).mouseenter(function(e) {
+                      $(this).popover('show');
+                      }).mouseleave(function(e) {
+                      var _this = this;
+                      setTimeout(function() {
+                      if (!$(".popover:hover").length) {
+                        $(_this).popover("hide");
+                       }
+                      }, 100);
+                      });    
+                      });
               </script>
                 <% end %>
-             </ul>
-            </li>
+             </li>
+            </ul>      
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
           <% if user_signed_in? %>
@@ -72,6 +84,7 @@
                 Manage <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
+                <li><%= link_to "Новый лот", new_lot_path %></li>
                 <li><%= link_to "Проверка лотов", lot_for_confirm_lotadmin_index_path %></li>
               </ul>
             </li>

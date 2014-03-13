@@ -48,7 +48,8 @@
         </td>
         <td>
           <% if lot.status < 1 %>
-             <%= link_to 'Принять', confirmed_lotadmin_path(lot), :class => 'btn btn-mini btn-success' %>
+             <%= link_to 'Принять', confirmed_lotadmin_path(lot), :class => 'btn btn-mini btn-success' %><br>
+             <%= link_to "Изменить", edit_lot_path(lot), :class => 'btn btn-mini btn-danger' %>
           <% end %> 
         </td>
    </tbody>

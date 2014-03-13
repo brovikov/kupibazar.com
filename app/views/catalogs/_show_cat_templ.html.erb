@@ -1,0 +1,65 @@
+<div class="row">
+<% @lot.each do |lot| %>
+
+  
+<div class="kubarik ">
+  <div class="kub_header">
+    <%= order_stat( lot.status ) %><br>
+    <%= lot.name %>
+  </div>
+  <div class="kub_body">
+    <a href=<%= lot_path( lot ) %> rel="<%= lot.id %>" data-original-title='Забронировано в лоте:' data-trigger="hover" >
+      <%= image_tag(lot.img, size: "185x180" ) %> 
+    </a>
+
+ 
+                <div id='<%= lot.id %>' style="display: none">
+                     <% lot.lotitems.each do |lotitem| %>
+                           <% if lotitem.user_id == 0 %>
+                               <b><%= lotitem.item %></b> 
+                                Свободно<br> 
+                           <% else %>
+                              <b><%= lotitem.item %></b> 
+                              <span class="green"><%= lotitem.user.nik %></span><br>
+                           <% end %>
+                <% end %>
+                     
+                </div>
+
+                   <script>
+                      $(function(){
+                      var timeoutObj;
+                      $("a[rel=<%= lot.id %>]")
+                      .popover({
+                      offset: 10,
+                      trigger: 'hover',
+                      html: true,
+                      placement: 'right',
+                      content: function() {
+                      return $('#<%= lot.id %>').html();
+                      }
+                      }).mouseenter(function(e) {
+                      $(this).popover('show');
+                      }).mouseleave(function(e) {
+                      var _this = this;
+                      setTimeout(function() {
+                      if (!$(".popover:hover").length) {
+                        $(_this).popover("hide");
+                       }
+                      }, 100);
+                      });    
+                      });
+              </script>
+  </div>
+  <div class="kub_footer">
+    <span class="price_local_kub">
+      <%= lot_price( lot, current_user ) %> <span class="price_cur"><%= current_user.configApp.currency  %></span><br>
+    </span>
+    <b class="agrey"><%= lot.value %> $</b><br>
+    <%= link_to 'Бронировать', lot_path(lot), class: 'btn btn-mini btn-primary' %><br>
+    <%= image_tag( lot.seller_rate ) %> 
+</div>
+    
+</div>  
+<% end %>
+</div>  

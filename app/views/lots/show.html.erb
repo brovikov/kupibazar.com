@@ -2,6 +2,7 @@
   <div class="span3">
     <br><h2> ЛОТ № <%= @lot.id %> </h2>
     <%= link_to image_tag(@lot.img, size: "250x250", class: "img-polaroid"), @lot.link, target: '_blank'  %><br>
+    <small><%= cat_path %></small><br><br>
     Цвет: <b><%= @lot.color %></b>
     <div Style='line-height:10pt'>
       <small><br>
@@ -59,7 +60,6 @@
   </p>
 
 <!-- ---------------- FORUM ----------------------------- -->
-<% @topic = Topic.find( @lot.topic_id ) %>
 <div class="module">
   <div class="module_header">
     <%= @topic.title %>

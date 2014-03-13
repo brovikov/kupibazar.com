@@ -17,7 +17,7 @@ module LotsHelper
           if lot.value < 10 
             total = ( lot.value + cfc )*user.configApp.rate
           else # если лот дороже 10 долларов
-            if lot.heavy
+            if lot.havy
               total = ( lot.value + lot.value*pcn*2 )*user.configApp.rate
             else 
               total = ( lot.value + lot.value*pcn )*user.configApp.rate
@@ -37,5 +37,12 @@ module LotsHelper
     end
      total
   end
+
+  def cat_path
+      a = Catalogitem.where( id: @lot.catalog_id ).first.catalog.title
+      b = Catalogitem.where( id: @lot.catalog_id ).first.line 
+      c = a + ' > ' + b
+  end
+   
     
 end

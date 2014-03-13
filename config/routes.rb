@@ -1,7 +1,10 @@
 # -*- encoding : utf-8 -*-
 TestApp::Application.routes.draw do
 
-  resources :catalogs
+  resources :catalogs do
+    get :show_catalog, on: :collection
+    get :show_catalog_first, on: :collection
+  end 
 
 
   resources :categories, :except => [:index, :show]

@@ -25,12 +25,42 @@ class LotsController < ApplicationController
   
   def show
     @lot = Lot.find(params[:id])
+    @topic = Topic.find( @lot.topic_id )
     
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lot }
     end
   end
+  
+  def edit
+    @lot = Lot.find(params[:id])
+  end
+  
+  def update
+    @lot = Lot.find(params[:id])
+
+    respond_to do |format|
+      if @lot.update_attributes(params[:lot])
+        format.html { redirect_to @lot, notice: 'Сборный лот успешно обновлен!.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @lot.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def destroy
+      @lot = Lot.find(params[:id])
+      @topic = Topic.find( @lot.topic_id)
+      @topic.destroy
+      @lot.destroy
+      
+      flash[:notice] = "Заказ успешно удален."
+      redirect_to lots_url
+  end
+
   
   def book
     @lotitem = Lotitem.find(params[:l_param])
