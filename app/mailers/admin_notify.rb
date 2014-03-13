@@ -16,4 +16,8 @@ class AdminNotify < ActionMailer::Base
     @user = user
     mail to: user.email, subject: "Отрицательный баланс на kupibazar.com"
   end
+  def cancel_delivery (item)
+    @item = item
+    mail to: item.order.user.email, subject: "Заказ, оформленный Вами на kupibazar.com к сожалению отменен"
+  end
 end

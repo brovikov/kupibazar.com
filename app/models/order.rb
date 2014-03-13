@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
       #  URL example http://ru.aliexpress.com/wholesale?SearchText=654654654&catId=0
       begin
         doc = Nokogiri::HTML(open(img.link))
-        img.img = doc.css('meta')[7]['content'] if img.img.blank? 
+        img.img = doc.css('meta')[8]['content'] if img.img.blank? 
       rescue
         img.img = "https://db.tt/kLZjK6hA"
       end
