@@ -50,6 +50,7 @@
           <td>
             <% if item.status == 7 %>
             <%= link_to 'На складе', na_sklade_admin_item_path(item), :class => 'btn btn-mini' %>
+            <%= link_to 'Отмена', cancel_admin_item_path(item), :confirm => 'Вы уверены?', :class => 'btn btn-mini btn-danger' %>
             <% end %> 
           </td>  
         </tr>
