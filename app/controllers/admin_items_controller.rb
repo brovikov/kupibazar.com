@@ -108,6 +108,7 @@ class AdminItemsController < ApplicationController
     respond_to do |format|
         if @item.status == 2 || 7
               @item.order.user.update_attributes( balance: (@item.order.user.balance + (@item.value_total) ) )           
+              AdminNotify.cancel_delivery(@item).deliver
               @item.update_attributes( status: 9, value: 0, value_total: 0 )
               @item.order.save  
               order_val( @item.order )
@@ -115,7 +116,6 @@ class AdminItemsController < ApplicationController
                 format.html { redirect_to list_pay_admin_items_url, notice: 'Статус заказа успешно обновлен.' }
                 format.json { head :no_content }
               else
-                AdminNotify.cancel_delivery(@item).deliver
                 format.html { redirect_to items_url, notice: 'Статус заказа успешно обновлен.' }
                 format.json { head :no_content }
               end
